@@ -3,12 +3,12 @@
     <image wx:if="{{dish.image}}" class="detail-img" src="{{dish.image}}" mode="aspectFill" />
     <view wx:else class="detail-img detail-img-ph">🍽</view>
     <view class="detail-body">
-      <view class="detail-close" bindtap="onClose" catchtap="onNoop">✕</view>
+      <view class="detail-close" catchtap="onClose">✕</view>
       <view class="detail-name">{{dish.name}}</view>
       <view class="detail-desc">{{dish.description || dish.name}}</view>
       <view class="detail-price-row">
         <view class="detail-price">¥{{dish.price}}</view>
-        <view wx:if="{{dish.flavor && dish.flavor.length}}" class="detail-flavor-btn" bindtap="onSelectFlavor" catchtap="onNoop">选择规格</view>
+        <view wx:if="{{dish.flavors && dish.flavors.length}}" class="detail-flavor-btn" catchtap="onSelectFlavor">选择规格</view>
         <van-stepper
           wx:else
           value="{{count}}"

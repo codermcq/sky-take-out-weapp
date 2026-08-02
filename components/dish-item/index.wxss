@@ -65,15 +65,18 @@
   font-weight: 700;
 }
 
-.dish-flavor-btn {
-  padding: 8rpx 24rpx;
+.dish-flavor-btn,
+.dish-add-btn {
+  padding: 8rpx 28rpx;
   background: #FF6B35;
   color: #fff;
   font-size: 24rpx;
   border-radius: 28rpx;
+  line-height: 1.4;
 }
 
-.dish-stepper {
-  display: flex;
-  align-items: center;
+.dish-add-btn {
+  font-size: 32rpx;
+  font-weight: 700;
+  padding: 4rpx 24rpx;
 }

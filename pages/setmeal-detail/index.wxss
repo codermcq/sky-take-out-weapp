@@ -88,21 +88,24 @@
   color: #333;
 }
 
+.setmeal-dish-desc {
+  font-size: 22rpx;
+  color: #999;
+  margin-top: 4rpx;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
 .setmeal-dish-meta {
   margin-top: 8rpx;
   display: flex;
   align-items: center;
 }
 
-.setmeal-dish-price {
-  font-size: 26rpx;
-  color: #FF6B35;
-}
-
 .setmeal-dish-copies {
   font-size: 22rpx;
   color: #999;
-  margin-left: 12rpx;
 }
 
 /* 底部 */

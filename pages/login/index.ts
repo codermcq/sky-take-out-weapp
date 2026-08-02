@@ -33,7 +33,7 @@ Page({
           if (pages.length > 1) {
             wx.navigateBack()
           } else {
-            wx.switchTab({ url: '/pages/home/index' })
+            wx.reLaunch({ url: '/pages/home/index' })
           }
         } catch {
           this.setData({ loading: false })

@@ -11,12 +11,13 @@ export interface Setmeal {
   status: number
 }
 
-/** 套餐内菜品 */
+/** 套餐内菜品（对齐后端 DishItemVO：无 dishId/price） */
 export interface SetmealDish {
-  dishId: number
   name: string
-  /** 单价（元） */
-  price: number
+  /** 份数 */
   copies: number
+  /** 菜品图片 */
   image?: string
+  /** 菜品描述 */
+  description?: string
 }

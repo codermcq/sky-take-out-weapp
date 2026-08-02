@@ -67,7 +67,7 @@ export function doRepeat(order: Order) {
       try {
         await repeat(order.id)
         wx.showToast({ title: '已加入购物车', icon: 'success' })
-        setTimeout(() => wx.switchTab({ url: '/pages/cart/index' }), 600)
+        setTimeout(() => wx.reLaunch({ url: '/pages/home/index' }), 600)
       } catch {
         /* 错误已提示 */
       }

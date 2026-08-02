@@ -2,7 +2,7 @@
   <view class="tableware-popup">
     <view class="tableware-header">
       <view class="tableware-title">选择餐具数量</view>
-      <view class="tableware-close" bindtap="onClose" catchtap="onNoop">✕</view>
+      <view class="tableware-close" catchtap="onClose">✕</view>
     </view>
     <view class="tableware-options">
       <view
@@ -11,7 +11,6 @@
         class="tableware-option {{selectedKey === item.key ? 'tableware-option-active' : ''}}"
         data-key="{{item.key}}"
         bindtap="onSelect"
-        catchtap="onNoop"
       >{{item.label}}</view>
     </view>
     <view class="tableware-footer">

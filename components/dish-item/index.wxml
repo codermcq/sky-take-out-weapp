@@ -6,19 +6,10 @@
     <view class="dish-desc" bindtap="onTapItem">{{dish.description || dish.name}}</view>
     <view class="dish-bottom">
       <view class="dish-price">¥{{dish.price}}</view>
-      <view wx:if="{{dish.flavor && dish.flavor.length}}" class="dish-flavor-btn" bindtap="onSelectFlavor">选择规格</view>
-      <view wx:else class="dish-stepper">
-        <van-stepper
-          value="{{count}}"
-          min="0"
-          integer
-          disable-input
-          disabled="{{disabled}}"
-          button-size="28"
-          theme="round"
-          bind:change="onStepperChange"
-        />
-      </view>
+      <!-- 有口味：选择规格 -->
+      <view wx:if="{{dish.flavors && dish.flavors.length}}" class="dish-flavor-btn" bindtap="onSelectFlavor">选择规格</view>
+      <!-- 无口味：直接加购 -->
+      <view wx:else class="dish-add-btn" bindtap="onAdd">＋</view>
     </view>
   </view>
 </view>

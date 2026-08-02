@@ -2,10 +2,11 @@
 import { mqRequest } from './index'
 import { ShoppingCartItem } from '../types/shoppingCart'
 
-/** 查询购物车 */
+/** 查询购物车（后台静默拉取，失败不弹 toast，由 store 兜底为空） */
 export function getCartList() {
   return mqRequest.get<ShoppingCartItem[]>({
     url: '/user/shoppingCart/list',
+    showError: false,
   })
 }
 

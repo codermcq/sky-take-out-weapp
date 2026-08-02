@@ -2,7 +2,7 @@
 import { mqRequest } from './index'
 import { LoginResult } from '../types/user'
 
-/** 微信登录：wx.login 拿 code 换 token */
+/** 微信登录：wx.login 拿 code 换 token（后端返回 {id, openid, token}） */
 export function login(code: string) {
   return mqRequest.post<LoginResult>({
     url: '/user/user/login',

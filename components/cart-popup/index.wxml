@@ -2,7 +2,7 @@
   <view class="cart-popup">
     <view class="cart-popup-header">
       <view class="cart-popup-title">已选商品</view>
-      <view class="cart-popup-clear" bindtap="onClear" catchtap="onNoop">清空</view>
+      <view class="cart-popup-clear" catchtap="onClear">清空</view>
     </view>
 
     <scroll-view wx:if="{{cartList.length}}" class="cart-popup-body" scroll-y enhanced show-scrollbar="{{false}}">
@@ -33,7 +33,7 @@
       <view class="cart-popup-total">
         合计：<text class="cart-popup-price">¥{{totalPrice}}</text>
       </view>
-      <view class="cart-popup-settle" bindtap="onSettle" catchtap="onNoop">去结算</view>
+      <view class="cart-popup-settle" catchtap="onSettle">去结算</view>
     </view>
   </view>
 </van-popup>

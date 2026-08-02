@@ -1,6 +1,6 @@
 /**
  * 规格（口味）选择弹窗
- * dish.flavor = [{ name: 口味名, value: "选项1,选项2,..." }]
+ * dish.flavors = [{ name: 口味名, value: "选项1,选项2,..." }]（对齐后端 DishVO.flavors）
  * 每组单选，确定后按顺序拼接口味文本
  */
 Component({
@@ -13,8 +13,8 @@ Component({
   },
   observers: {
     'show, dish'(show: boolean, dish: any) {
-      if (show && dish && dish.flavor) {
-        const groups = dish.flavor.map((f: any) => {
+      if (show && dish && dish.flavors) {
+        const groups = dish.flavors.map((f: any) => {
           const options = String(f.value || '')
             .split(',')
             .map((s: string) => s.trim())

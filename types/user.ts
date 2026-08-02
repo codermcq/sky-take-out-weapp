@@ -5,10 +5,9 @@ export interface UserInfo {
   avatar?: string
 }
 
-/** 登录接口返回 */
+/** 登录接口返回（对应后端 UserLoginVO：id/openid/token） */
 export interface LoginResult {
-  token: string
+  id: number
   openid: string
-  nickname?: string
-  avatar?: string
+  token: string
 }

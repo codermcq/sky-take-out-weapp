@@ -7,10 +7,6 @@
         <view class="home-shop-status {{shopStatus === 1 ? '' : 'is-closed'}}">{{shopStatus === 1 ? '营业中' : '休息中'}}</view>
         <view class="home-phone" bindtap="onCallPhone">📞</view>
       </view>
-      <view class="home-search" bindtap="onGoSearch">
-        <text class="home-search-icon">🔍</text>
-        <text class="home-search-text">搜索菜品</text>
-      </view>
     </view>
   </view>
 
@@ -30,24 +26,31 @@
     </scroll-view>
 
     <scroll-view class="home-goods" scroll-y>
-      <block wx:for="{{categories[activeIndex].items}}" wx:key="id">
-        <dish-item
-          wx:if="{{categories[activeIndex].type === 1}}"
-          dish="{{item}}"
-          count="{{countMap[item.id] || 0}}"
-          disabled="{{shopStatus !== 1}}"
-          bind:detail="onOpenDetail"
-          bind:flavor="onSelectFlavor"
-          bind:change="onDishChange"
-        />
-        <setmeal-item
-          wx:else
-          setmeal="{{item}}"
-          disabled="{{shopStatus !== 1}}"
-          bind:tap="onSetmealTap"
-        />
-      </block>
-      <view wx:if="{{categories.length && !categories[activeIndex].items.length}}" class="home-goods-empty">本分类暂无商品</view>
+      <!-- 加载中 -->
+      <view wx:if="{{categories.length && categories[activeIndex]._loading}}" class="home-goods-loading">加载中...</view>
+
+      <!-- 已加载但无商品 -->
+      <view wx:elif="{{categories.length && categories[activeIndex]._empty}}" class="home-goods-empty">本分类暂无商品</view>
+
+      <!-- 有商品 -->
+      <view wx:elif="{{categories.length && categories[activeIndex].items && categories[activeIndex].items.length}}">
+        <block wx:for="{{categories[activeIndex].items}}" wx:key="id">
+          <dish-item
+            wx:if="{{categories[activeIndex].type === 1}}"
+            dish="{{item}}"
+            disabled="{{shopStatus !== 1}}"
+            bind:detail="onOpenDetail"
+            bind:flavor="onSelectFlavor"
+            bind:add="onDishAdd"
+          />
+          <setmeal-item
+            wx:else
+            setmeal="{{item}}"
+            disabled="{{shopStatus !== 1}}"
+            bind:tap="onSetmealTap"
+          />
+        </block>
+      </view>
     </scroll-view>
   </view>
 

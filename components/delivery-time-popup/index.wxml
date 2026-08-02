@@ -2,7 +2,7 @@
   <view class="time-popup">
     <view class="time-header">
       <view class="time-title">选择配送时间</view>
-      <view class="time-close" bindtap="onClose" catchtap="onNoop">✕</view>
+      <view class="time-close" catchtap="onClose">✕</view>
     </view>
 
     <view class="time-date-tabs">
@@ -12,7 +12,6 @@
         class="time-date-tab {{activeDateIndex === index ? 'time-date-tab-active' : ''}}"
         data-index="{{index}}"
         bindtap="onSelectDate"
-        catchtap="onNoop"
       >{{item.label}}</view>
     </view>
 
@@ -23,7 +22,6 @@
         class="time-slot {{activeSlotIndex === index ? 'time-slot-active' : ''}}"
         data-index="{{index}}"
         bindtap="onSelectSlot"
-        catchtap="onNoop"
       >{{item}}</view>
     </scroll-view>
 

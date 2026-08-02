@@ -16,8 +16,11 @@ const envVersion = accountInfo.miniProgram.envVersion
 
 export const BASE_URL = envVersion === 'release' ? PROD_BASE_URL : DEV_BASE_URL
 
-/** 登录 token 在 storage 中的 key（header 名同为 token，与后端约定一致） */
-export const TOKEN_KEY = 'token'
+/**
+ * 登录 token 在 storage 中的 key。
+ * 后端用户端 JWT 配置 `sky.jwt.user-token-name: authentication`，header 名同为 authentication。
+ */
+export const TOKEN_KEY = 'authentication'
 
 /** 登录页路径 */
 export const LOGIN_PAGE_PATH = '/pages/login/index'

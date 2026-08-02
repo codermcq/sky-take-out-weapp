@@ -8,7 +8,7 @@ export interface DishFlavor {
   value: string
 }
 
-/** 菜品 */
+/** 菜品（对齐后端 DishVO，口味字段为 flavors） */
 export interface Dish {
   id: number
   name: string
@@ -19,8 +19,6 @@ export interface Dish {
   description: string
   /** 状态：1 起售，0 停售 */
   status: number
-  /** 是否有规格（口味） */
-  flavor?: DishFlavor[]
-  /** 套餐内份数（setmeal-dish 场景） */
-  copies?: number
+  /** 菜品关联的口味（后端 DishVO.flavors） */
+  flavors?: DishFlavor[]
 }

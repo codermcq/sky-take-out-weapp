@@ -1,12 +1,12 @@
 .flavor-popup {
   padding: 32rpx;
-  padding-bottom: calc(32rpx + env(safe-area-inset-bottom));
 }
 
 .flavor-header {
   display: flex;
   align-items: center;
   justify-content: space-between;
+  margin-bottom: 16rpx;
 }
 
 .flavor-title {
@@ -51,8 +51,8 @@
 
 .flavor-option-active {
   background: #fff0e8;
-  color: #FF6B35;
-  border: 1rpx solid #FF6B35;
+  color: #FFB800;
+  border: 1rpx solid #FFB800;
 }
 
 .flavor-footer {

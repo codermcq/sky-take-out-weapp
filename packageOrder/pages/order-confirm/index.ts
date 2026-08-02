@@ -180,7 +180,7 @@ Page({
     try {
       const res = await submitOrder(dto)
       // 提交成功：清购物车 → 跳支付页
-      shopCartStore.dispatch('cleanAction').catch(() => {})
+      shopCartStore.dispatch('cleanAction')
       wx.redirectTo({
         url: `/packageOrder/pages/pay/index?id=${res.id}&orderNumber=${res.orderNumber}&amount=${res.orderAmount}`,
       })

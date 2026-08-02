@@ -40,16 +40,19 @@ Page({
     const ok = await ensureLogin()
     if (!ok) return
     this.setData({ adding: true })
-    try {
-      await shopCartStore.dispatch('addAction', { setmealId: this.data.setmealId, number: 1 })
-      wx.showToast({ title: '已加入购物车', icon: 'success' })
-    } catch {
-      /* 错误已提示 */
-    }
+    const d = this.data.setmeal
+    shopCartStore.dispatch('addAction', {
+      setmealId: d.id,
+      name: d.name,
+      image: d.image,
+      amount: d.price,
+      number: 1,
+    })
+    wx.showToast({ title: '已加入购物车', icon: 'success' })
     this.setData({ adding: false })
   },
 
-  onGoCart() {
-    wx.switchTab({ url: '/pages/cart/index' })
+  onGoHome() {
+    wx.reLaunch({ url: '/pages/home/index' })
   },
 })

@@ -19,15 +19,11 @@ const userStore = new HYEventStore({
         ctx.isLoggedIn = true
       }
     },
-    /** 微信登录：wx.login 拿 code 换 token */
+    /** 微信登录：wx.login 拿 code 换 token（后端返回 {id, openid, token}） */
     loginAction(ctx: any, code: string) {
       return loginApi(code).then((res) => {
         ctx.token = res.token
-        ctx.userInfo = {
-          openid: res.openid,
-          nickname: res.nickname || '',
-          avatar: res.avatar || '',
-        }
+        ctx.userInfo = { openid: res.openid }
         ctx.isLoggedIn = true
         wx.setStorageSync(TOKEN_KEY, res.token)
         return res

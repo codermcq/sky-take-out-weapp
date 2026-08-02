@@ -81,6 +81,6 @@ Page({
   },
 
   onGoHome() {
-    wx.switchTab({ url: '/pages/home/index' })
+    wx.reLaunch({ url: '/pages/home/index' })
   },
 })

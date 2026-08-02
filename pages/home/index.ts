@@ -81,28 +81,47 @@ Page({
     shopStore.offState('status', self.cb.shopStatus)
   },
 
-  /** 加载分类与商品（无商品的分类隐藏） */
+  /**
+   * 加载分类（仅加载分类列表，不预加载菜品）
+   * 选中第一个分类并懒加载它的菜品。
+   */
   loadData() {
     wx.showLoading({ title: '加载中', mask: true })
     Promise.all([getCategoryList(1), getCategoryList(2)])
       .then(([dishCats, setmealCats]) => {
         const cats = [...dishCats, ...setmealCats]
-        const requests = cats.map((cat) => {
-          const p = cat.type === 1 ? getDishList(cat.id) : getSetmealList(cat.id)
-          return p
-            .then((items) => ({ ...cat, items }))
-            .catch(() => ({ ...cat, items: [] }))
-        })
-        return Promise.all(requests)
-      })
-      .then((categories) => {
-        const valid = categories.filter((c) => c.items && c.items.length)
-        this.setData({ categories: valid, activeIndex: 0 })
+        if (cats.length) {
+          this.setData({ categories: cats })
+          this.loadCategoryItems(0) // 默认加载第一个分类
+        } else {
+          this.setData({ categories: [] })
+        }
       })
       .catch(() => {
         wx.showToast({ title: '加载失败，下拉可重试', icon: 'none' })
       })
       .finally(() => wx.hideLoading())
+  },
+
+  /** 懒加载指定分类的菜品/套餐（仅在未被加载时触发） */
+  loadCategoryItems(index: number) {
+    const cat = this.data.categories[index]
+    if (!cat || cat._loaded) return
+    // 标记正在加载，防重复请求
+    this.setData({ [`categories[${index}]._loading`]: true })
+    const fetcher = cat.type === 1 ? getDishList(cat.id) : getSetmealList(cat.id)
+    fetcher
+      .then((items) => {
+        // 无菜品的分类不展示（原型要求隐藏）
+        if (!items || !items.length) {
+          this.setData({ [`categories[${index}]._loaded`]: true, [`categories[${index}]._loading`]: false, [`categories[${index}]._empty`]: true })
+          return
+        }
+        this.setData({ [`categories[${index}].items`]: items, [`categories[${index}]._loaded`]: true, [`categories[${index}]._loading`]: false })
+      })
+      .catch(() => {
+        this.setData({ [`categories[${index}]._loaded`]: true, [`categories[${index}]._loading`]: false, [`categories[${index}]._empty`]: true })
+      })
   },
 
   onPullDownRefresh() {
@@ -113,12 +132,11 @@ Page({
     ]).finally(() => wx.stopPullDownRefresh())
   },
 
+  /** 切换分类：已加载过则直接显示，否则懒加载 */
   onSelectCat(e: WechatMiniprogram.TouchEvent) {
-    this.setData({ activeIndex: Number(e.currentTarget.dataset.index) })
-  },
-
-  onGoSearch() {
-    wx.navigateTo({ url: '/packageSearch/pages/search/index' })
+    const index = Number(e.currentTarget.dataset.index)
+    this.setData({ activeIndex: index })
+    this.loadCategoryItems(index)
   },
 
   onSetmealTap(e: WechatMiniprogram.CustomEvent) {
@@ -147,15 +165,34 @@ Page({
     if (this.data.shopStatus !== 1) return
     const ok = await ensureLogin()
     if (!ok) return
-    try {
-      await shopCartStore.dispatch('addAction', { dishId: dish.id, dishFlavor: flavorText, number: 1 })
-      wx.showToast({ title: '已加入购物车', icon: 'success' })
-    } catch {
-      /* 错误已提示 */
-    }
+    shopCartStore.dispatch('addAction', {
+      dishId: dish.id,
+      name: dish.name,
+      image: dish.image,
+      amount: dish.price,
+      dishFlavor: flavorText,
+      number: 1,
+    })
+    wx.showToast({ title: '已加入购物车', icon: 'success' })
   },
 
-  /** 无规格菜品步进器变化 */
+  /** 无规格菜品：点击「＋」直接加购 */
+  async onDishAdd(e: WechatMiniprogram.CustomEvent) {
+    if (this.data.shopStatus !== 1) return
+    const { dish } = e.detail
+    const ok = await ensureLogin()
+    if (!ok) return
+    shopCartStore.dispatch('addAction', {
+      dishId: dish.id,
+      name: dish.name,
+      image: dish.image,
+      amount: dish.price,
+      number: 1,
+    })
+    wx.showToast({ title: '已加入购物车', icon: 'success' })
+  },
+
+  /** 无规格菜品步进器变化（产品详情弹窗内用） */
   async onDishChange(e: WechatMiniprogram.CustomEvent) {
     if (this.data.shopStatus !== 1) return
     const { dish, value } = e.detail
@@ -163,16 +200,18 @@ Page({
     if (value === cur) return
     const ok = await ensureLogin()
     if (!ok) return
-    try {
-      if (value > cur) {
-        await shopCartStore.dispatch('addAction', { dishId: dish.id, number: value - cur })
-      } else {
-        for (let i = 0; i < cur - value; i++) {
-          await shopCartStore.dispatch('subAction', { dishId: dish.id })
-        }
+    if (value > cur) {
+      shopCartStore.dispatch('addAction', {
+        dishId: dish.id,
+        name: dish.name,
+        image: dish.image,
+        amount: dish.price,
+        number: value - cur,
+      })
+    } else {
+      for (let i = 0; i < cur - value; i++) {
+        shopCartStore.dispatch('subAction', { dishId: dish.id })
       }
-    } catch {
-      /* 错误已提示 */
     }
   },
 
@@ -190,31 +229,28 @@ Page({
     this.setData({ cartVisible: false })
   },
 
-  async onCartItemChange(e: WechatMiniprogram.CustomEvent) {
+  onCartItemChange(e: WechatMiniprogram.CustomEvent) {
     const { item, value } = e.detail
     const cur = item.number
     if (value === cur) return
-    const ok = await ensureLogin()
-    if (!ok) return
-    try {
-      if (value > cur) {
-        await shopCartStore.dispatch('addAction', {
+    if (value > cur) {
+      shopCartStore.dispatch('addAction', {
+        dishId: item.dishId,
+        setmealId: item.setmealId,
+        name: item.name,
+        image: item.image,
+        amount: item.amount,
+        dishFlavor: item.dishFlavor,
+        number: value - cur,
+      })
+    } else {
+      for (let i = 0; i < cur - value; i++) {
+        shopCartStore.dispatch('subAction', {
           dishId: item.dishId,
           setmealId: item.setmealId,
           dishFlavor: item.dishFlavor,
-          number: value - cur,
         })
-      } else {
-        for (let i = 0; i < cur - value; i++) {
-          await shopCartStore.dispatch('subAction', {
-            dishId: item.dishId,
-            setmealId: item.setmealId,
-            dishFlavor: item.dishFlavor,
-          })
-        }
       }
-    } catch {
-      /* 错误已提示 */
     }
   },
 
@@ -223,7 +259,7 @@ Page({
       title: '提示',
       content: '确定清空购物车吗？',
       success: (res) => {
-        if (res.confirm) shopCartStore.dispatch('cleanAction').catch(() => {})
+        if (res.confirm) shopCartStore.dispatch('cleanAction')
       },
     })
   },
@@ -231,7 +267,6 @@ Page({
   async onCartSettle() {
     const ok = await ensureLogin()
     if (!ok) return
-    // 全选后进入确认订单
     shopCartStore.dispatch('toggleSelectAllAction', true)
     wx.navigateTo({ url: '/packageOrder/pages/order-confirm/index' })
   },
