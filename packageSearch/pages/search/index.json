@@ -1,0 +1,9 @@
+{
+  "usingComponents": {
+    "empty-view": "/components/empty-view/index",
+    "van-search": "@vant/weapp/search/index",
+    "van-loading": "@vant/weapp/loading/index",
+    "van-icon": "@vant/weapp/icon/index"
+  },
+  "navigationStyle": "custom"
+}

@@ -1,0 +1,32 @@
+<view class="pay-page">
+  <nav-bar title="支付订单" />
+
+  <!-- 倒计时提示 -->
+  <view class="pay-tip {{expired ? 'pay-tip-expired' : ''}}">
+    {{expired ? '订单已超时取消' : '请在 ' + countdown + ' 内完成支付，超时订单将自动取消'}}
+  </view>
+
+  <view class="pay-card">
+    <view class="pay-card-amount">
+      <text class="pay-card-amount-label">待支付金额（元）</text>
+      <text class="pay-card-amount-value">¥{{amount}}</text>
+    </view>
+    <view class="pay-card-no">订单号：{{orderNumber}}</view>
+  </view>
+
+  <!-- 支付方式 -->
+  <view class="pay-method">
+    <view class="pay-method-title">支付方式</view>
+    <view class="pay-method-item">
+      <view class="pay-method-icon">💚</view>
+      <view class="pay-method-name">微信支付</view>
+      <view class="pay-method-selected">✓</view>
+    </view>
+  </view>
+
+  <view class="pay-actions">
+    <van-button type="primary" round block disabled="{{expired}}" loading="{{paying}}" bind:click="onPay">立即支付</van-button>
+    <view class="pay-cancel" bindtap="onCancel">取消订单</view>
+    <view class="pay-home" bindtap="onGoHome">回到首页</view>
+  </view>
+</view>

@@ -1,0 +1,34 @@
+<view class="order-card" bindtap="onTapCard">
+  <view class="order-card-header">
+    <view class="order-card-no">订单号：{{order.number}}</view>
+    <van-tag color="#FF6B35" plain>{{statusText}}</van-tag>
+  </view>
+
+  <scroll-view class="order-card-items" scroll-x enhanced show-scrollbar="{{false}}">
+    <view wx:for="{{order.orderDetailList}}" wx:key="id" class="order-card-item">
+      <image wx:if="{{item.image}}" class="order-card-img" src="{{item.image}}" mode="aspectFill" />
+      <view wx:else class="order-card-img order-card-img-ph">🍽</view>
+      <view class="order-card-item-name">{{item.name}}</view>
+      <view class="order-card-item-num">x{{item.number}}</view>
+    </view>
+  </scroll-view>
+
+  <view class="order-card-footer">
+    <view class="order-card-amount">
+      <text wx:if="{{order.payStatus === 0 && order.status === 1}}" class="order-card-unpaid">未付款</text>
+      <text class="order-card-price">¥{{order.amount}}</text>
+    </view>
+    <view class="order-card-actions" catchtap="onNoop">
+      <van-button
+        wx:for="{{actions}}"
+        wx:key="key"
+        size="small"
+        plain="{{!item.type}}"
+        type="{{item.type === 'primary' ? 'primary' : 'default'}}"
+        custom-style="{{item.type === 'primary' ? '' : 'color:#666;border-color:#ddd;'}}"
+        data-key="{{item.key}}"
+        bind:click="onAction"
+      >{{item.label}}</van-button>
+    </view>
+  </view>
+</view>

@@ -1,0 +1,13 @@
+{
+  "usingComponents": {
+    "nav-bar": "/components/nav-bar/index",
+    "address-card": "/components/address-card/index",
+    "tableware-popup": "/components/tableware-popup/index",
+    "delivery-time-popup": "/components/delivery-time-popup/index",
+    "van-button": "@vant/weapp/button/index",
+    "van-cell": "@vant/weapp/cell/index",
+    "van-cell-group": "@vant/weapp/cell-group/index",
+    "van-icon": "@vant/weapp/icon/index"
+  },
+  "navigationStyle": "custom"
+}

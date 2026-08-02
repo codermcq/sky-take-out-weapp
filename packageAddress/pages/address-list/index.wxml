@@ -1,0 +1,24 @@
+<view class="addr-page">
+  <nav-bar title="{{mode === 'select' ? '选择地址' : '地址管理'}}" />
+
+  <van-loading wx:if="{{loading}}" custom-style="margin: 120rpx auto;" />
+
+  <view wx:else class="addr-list">
+    <address-card
+      wx:for="{{list}}"
+      wx:key="id"
+      address="{{item}}"
+      selected="{{item.isDefault}}"
+      manage="{{mode === 'manage'}}"
+      bind:select="onSelect"
+      bind:edit="onEdit"
+      bind:delete="onDelete"
+      bind:set-default="onSetDefault"
+    />
+    <empty-view wx:if="{{!list.length}}" type="address" text="暂无地址" btn-text="新增地址" bind:btn="onAdd" />
+  </view>
+
+  <view class="addr-footer">
+    <van-button type="primary" round block custom-class="addr-add-btn" bind:click="onAdd">+ 新增地址</van-button>
+  </view>
+</view>

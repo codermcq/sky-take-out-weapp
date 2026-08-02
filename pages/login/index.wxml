@@ -1,0 +1,15 @@
+<view class="login-page">
+  <view class="login-brand">
+    <view class="login-logo">🍔</view>
+    <view class="login-title">苍穹外卖</view>
+    <view class="login-sub">新鲜现做 · 快速送达</view>
+  </view>
+
+  <view class="login-content">
+    <view class="login-tip">登录后即可点餐、查看订单</view>
+    <van-button type="primary" round block loading="{{loading}}" custom-class="login-btn" bind:click="onLoginTap">
+      <view class="login-btn-text">微信一键登录</view>
+    </van-button>
+    <view class="login-agree">登录即代表同意《用户协议》和《隐私政策》</view>
+  </view>
+</view>

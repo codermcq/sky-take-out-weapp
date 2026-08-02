@@ -1,0 +1,27 @@
+<view class="order-list-page">
+  <nav-bar title="历史订单" />
+
+  <van-tabs active="{{activeTab}}" color="#FF6B35" line-width="40rpx" bind:change="onTabChange">
+    <van-tab wx:for="{{tabs}}" wx:key="*this" title="{{item}}">
+      <view class="order-list-body">
+        <van-loading wx:if="{{loading}}" custom-style="margin: 80rpx auto;" />
+        <block wx:elif="{{orders.length}}">
+          <order-card
+            wx:for="{{orders}}"
+            wx:key="id"
+            order="{{item}}"
+            bind:detail="onOrderDetail"
+            bind:pay="onOrderAction"
+            bind:cancel="onOrderAction"
+            bind:reminder="onOrderAction"
+            bind:repeat="onOrderAction"
+            bind:refund="onOrderAction"
+          />
+          <view wx:if="{{loadingMore}}" class="order-list-more"><van-loading size="24" /> 加载中...</view>
+          <view wx:elif="{{finished}}" class="order-list-more">没有更多了</view>
+        </block>
+        <empty-view wx:else type="order" text="暂无订单" />
+      </view>
+    </van-tab>
+  </van-tabs>
+</view>

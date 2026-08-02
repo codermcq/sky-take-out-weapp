@@ -1,0 +1,70 @@
+<view class="profile-page">
+  <nav-bar title="个人中心" show-back="{{false}}" />
+
+  <!-- 用户信息头 -->
+  <view class="profile-header">
+    <view class="profile-user">
+      <view class="profile-avatar">
+        <image wx:if="{{userInfo.avatar}}" src="{{userInfo.avatar}}" mode="aspectFill" class="profile-avatar-img" />
+        <view wx:else class="profile-avatar-ph">👤</view>
+      </view>
+      <view class="profile-user-info">
+        <block wx:if="{{loggedIn}}">
+          <view class="profile-nickname">{{userInfo.nickname || '微信用户'}}</view>
+          <view class="profile-desc">欢迎回来</view>
+        </block>
+        <block wx:else>
+          <view class="profile-nickname" bindtap="onGoLogin">点击登录</view>
+          <view class="profile-desc">登录后可点餐、查看订单</view>
+        </block>
+      </view>
+      <view wx:if="{{loggedIn}}" class="profile-logout" bindtap="onLogout">退出</view>
+    </view>
+  </view>
+
+  <!-- 订单入口 -->
+  <view class="profile-section">
+    <view class="profile-section-title">我的订单</view>
+    <view class="profile-order-tabs">
+      <view class="profile-order-tab" data-tab="0" bindtap="onGoOrderList">
+        <view class="profile-order-icon">📋</view>
+        <view class="profile-order-text">全部订单</view>
+      </view>
+      <view class="profile-order-tab" data-tab="1" bindtap="onGoOrderList">
+        <view class="profile-order-icon">💰</view>
+        <view class="profile-order-text">待付款</view>
+      </view>
+      <view class="profile-order-tab" data-tab="2" bindtap="onGoOrderList">
+        <view class="profile-order-icon">↩️</view>
+        <view class="profile-order-text">退款</view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 功能入口 -->
+  <view class="profile-section">
+    <van-cell-group inset>
+      <van-cell title="地址管理" is-link icon="location" bind:click="onGoAddress" />
+    </van-cell-group>
+  </view>
+
+  <!-- 最近订单 -->
+  <view class="profile-section">
+    <view class="profile-section-title">最近订单</view>
+    <van-loading wx:if="{{loadingOrders}}" custom-style="margin: 60rpx auto;" />
+    <block wx:elif="{{orders.length}}">
+      <order-card
+        wx:for="{{orders}}"
+        wx:key="id"
+        order="{{item}}"
+        bind:detail="onOrderDetail"
+        bind:pay="onOrderAction"
+        bind:cancel="onOrderAction"
+        bind:reminder="onOrderAction"
+        bind:repeat="onOrderAction"
+        bind:refund="onOrderAction"
+      />
+    </block>
+    <empty-view wx:else type="order" text="暂无最近订单" />
+  </view>
+</view>

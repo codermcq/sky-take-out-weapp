@@ -1,0 +1,9 @@
+<van-popup show="{{show}}" position="bottom" bind:close="onClose">
+  <van-area
+    area-list="{{areaList}}"
+    columns-num="{{columnsNum}}"
+    value="{{value}}"
+    bind:confirm="onConfirm"
+    bind:cancel="onCancel"
+  />
+</van-popup>

@@ -1,0 +1,110 @@
+<view class="home-page">
+  <!-- 头部 -->
+  <view class="home-header">
+    <view class="home-header-inner" style="padding-top: {{statusBarHeight}}px;">
+      <view class="home-shop-row">
+        <view class="home-shop-name">苍穹外卖</view>
+        <view class="home-shop-status {{shopStatus === 1 ? '' : 'is-closed'}}">{{shopStatus === 1 ? '营业中' : '休息中'}}</view>
+        <view class="home-phone" bindtap="onCallPhone">📞</view>
+      </view>
+      <view class="home-search" bindtap="onGoSearch">
+        <text class="home-search-icon">🔍</text>
+        <text class="home-search-text">搜索菜品</text>
+      </view>
+    </view>
+  </view>
+
+  <!-- 内容 -->
+  <view class="home-content">
+    <scroll-view class="home-cats" scroll-y>
+      <view
+        wx:for="{{categories}}"
+        wx:key="id"
+        class="home-cat {{activeIndex === index ? 'home-cat-active' : ''}}"
+        data-index="{{index}}"
+        bindtap="onSelectCat"
+      >
+        <view class="home-cat-name">{{item.name}}</view>
+        <view wx:if="{{item.type === 2}}" class="home-cat-tag">套餐</view>
+      </view>
+    </scroll-view>
+
+    <scroll-view class="home-goods" scroll-y>
+      <block wx:for="{{categories[activeIndex].items}}" wx:key="id">
+        <dish-item
+          wx:if="{{categories[activeIndex].type === 1}}"
+          dish="{{item}}"
+          count="{{countMap[item.id] || 0}}"
+          disabled="{{shopStatus !== 1}}"
+          bind:detail="onOpenDetail"
+          bind:flavor="onSelectFlavor"
+          bind:change="onDishChange"
+        />
+        <setmeal-item
+          wx:else
+          setmeal="{{item}}"
+          disabled="{{shopStatus !== 1}}"
+          bind:tap="onSetmealTap"
+        />
+      </block>
+      <view wx:if="{{categories.length && !categories[activeIndex].items.length}}" class="home-goods-empty">本分类暂无商品</view>
+    </scroll-view>
+  </view>
+
+  <!-- 底部购物车栏 -->
+  <cart-bar
+    total-price="{{totalAllPrice}}"
+    total-count="{{allCount}}"
+    visible="{{allCount > 0}}"
+    disabled="{{shopStatus !== 1}}"
+    bind:tap="onToggleCart"
+  />
+
+  <!-- 购物车弹窗 -->
+  <cart-popup
+    show="{{cartVisible}}"
+    cart-list="{{cartList}}"
+    total-price="{{totalAllPrice}}"
+    bind:close="onCloseCart"
+    bind:change="onCartItemChange"
+    bind:clear="onCartClear"
+    bind:settle="onCartSettle"
+  />
+
+  <!-- 规格选择弹窗 -->
+  <flavor-select-popup
+    show="{{flavorVisible}}"
+    dish="{{flavorDish}}"
+    bind:close="onCloseFlavor"
+    bind:confirm="onFlavorConfirm"
+  />
+
+  <!-- 商品详情弹窗 -->
+  <product-detail-popup
+    show="{{detailVisible}}"
+    dish="{{currentDish}}"
+    count="{{countMap[currentDish.id] || 0}}"
+    bind:close="onCloseDetail"
+    bind:flavor="onSelectFlavor"
+    bind:change="onDetailChange"
+  />
+
+  <!-- 拨打电话弹框 -->
+  <van-popup show="{{phoneVisible}}" closeable position="bottom" round bind:close="onClosePhone">
+    <view class="phone-popup">
+      <view class="phone-popup-title">商家电话</view>
+      <view class="phone-popup-num" bindtap="onPhoneConfirm">{{shopPhone}}</view>
+      <view class="phone-popup-btn" bindtap="onPhoneConfirm">拨打电话</view>
+      <view class="phone-popup-cancel" bindtap="onClosePhone">取消</view>
+    </view>
+  </van-popup>
+
+  <!-- 休息中遮罩 -->
+  <view wx:if="{{shopLoaded && shopStatus !== 1}}" class="closed-mask">
+    <view class="closed-box">
+      <view class="closed-icon">🌙</view>
+      <view class="closed-text">本店已打烊</view>
+      <view class="closed-sub">休息中，暂不可点餐</view>
+    </view>
+  </view>
+</view>

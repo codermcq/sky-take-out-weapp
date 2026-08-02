@@ -1,0 +1,21 @@
+<van-popup show="{{show}}" position="bottom" custom-style="border-radius: 24rpx 24rpx 0 0;" bind:close="onClose">
+  <view class="tableware-popup">
+    <view class="tableware-header">
+      <view class="tableware-title">选择餐具数量</view>
+      <view class="tableware-close" bindtap="onClose" catchtap="onNoop">✕</view>
+    </view>
+    <view class="tableware-options">
+      <view
+        wx:for="{{options}}"
+        wx:key="key"
+        class="tableware-option {{selectedKey === item.key ? 'tableware-option-active' : ''}}"
+        data-key="{{item.key}}"
+        bindtap="onSelect"
+        catchtap="onNoop"
+      >{{item.label}}</view>
+    </view>
+    <view class="tableware-footer">
+      <van-button type="primary" block round bind:click="onConfirm">确定</van-button>
+    </view>
+  </view>
+</van-popup>

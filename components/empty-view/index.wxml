@@ -1,0 +1,5 @@
+<view class="empty-view">
+  <view class="empty-icon">{{iconMap[type]}}</view>
+  <view class="empty-text">{{text}}</view>
+  <view wx:if="{{btnText}}" class="empty-btn" bindtap="onBtn">{{btnText}}</view>
+</view>

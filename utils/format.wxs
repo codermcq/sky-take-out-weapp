@@ -1,0 +1,24 @@
+/** WXML 内格式化工具 */
+
+function pad2(n) {
+  return n < 10 ? '0' + n : '' + n
+}
+
+module.exports = {
+  /** 金额两位小数 */
+  price: function (value) {
+    if (value === undefined || value === null || isNaN(value)) return '0.00'
+    return (Math.round(value * 100) / 100).toFixed(2)
+  },
+  /** 超长截断 */
+  truncate: function (str, len) {
+    if (!str) return ''
+    str = String(str)
+    return str.length > len ? str.slice(0, len) + '…' : str
+  },
+  /** 时间字符串去掉毫秒/秒，如 2026-08-03 12:30:00 → 2026-08-03 12:30 */
+  shortTime: function (value) {
+    if (!value) return ''
+    return String(value).slice(0, 16)
+  },
+}

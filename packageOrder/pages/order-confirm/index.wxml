@@ -1,0 +1,83 @@
+<view class="confirm-page">
+  <nav-bar title="确认订单" />
+
+  <!-- 收货地址 -->
+  <view class="confirm-section" bindtap="onChooseAddress">
+    <block wx:if="{{address}}">
+      <address-card address="{{address}}" selected="{{true}}" />
+    </block>
+    <view wx:else class="confirm-address-empty">
+      <view class="confirm-address-empty-icon">📍</view>
+      <view class="confirm-address-empty-text">请选择收货地址</view>
+      <view class="confirm-address-empty-arrow">›</view>
+    </view>
+  </view>
+
+  <!-- 配送时间 / 餐具 / 备注 -->
+  <view class="confirm-section">
+    <van-cell title="配送时间" value="{{deliveryTimeText}}" is-link arrow-direction="right" bind:click="onOpenTime" />
+    <van-cell title="餐具数量" value="{{tablewareText}}" is-link arrow-direction="right" bind:click="onOpenTableware" />
+    <van-cell title="订单备注" value="{{remark}}" label="点击填写备注" is-link arrow-direction="right" bind:click="onGoRemark" value-class="confirm-remark-value" />
+  </view>
+
+  <!-- 商品清单 -->
+  <view class="confirm-section">
+    <view class="confirm-goods-title">商品清单</view>
+    <view
+      wx:for="{{visibleItems}}"
+      wx:key="id"
+      class="confirm-goods-row"
+    >
+      <image wx:if="{{item.image}}" class="confirm-goods-img" src="{{item.image}}" mode="aspectFill" />
+      <view wx:else class="confirm-goods-img confirm-goods-img-ph">🍽</view>
+      <view class="confirm-goods-info">
+        <view class="confirm-goods-name">{{item.name}}</view>
+        <view wx:if="{{item.dishFlavor}}" class="confirm-goods-flavor">{{item.dishFlavor}}</view>
+        <view class="confirm-goods-price">¥{{item.amount}}</view>
+      </view>
+      <view class="confirm-goods-count">x{{item.number}}</view>
+    </view>
+    <view wx:if="{{items.length > 3}}" class="confirm-goods-toggle" bindtap="onToggleExpand">
+      {{expanded ? '点击收起 ▲' : '展开更多 ▼'}}
+    </view>
+  </view>
+
+  <!-- 费用明细 -->
+  <view class="confirm-section">
+    <view class="confirm-fee-row">
+      <text>商品总额</text>
+      <text>¥{{goodsPrice}}</text>
+    </view>
+    <view class="confirm-fee-row">
+      <text>打包费（{{totalCount}}份 × ¥{{packFeePerItem}}）</text>
+      <text>¥{{packFee}}</text>
+    </view>
+    <view class="confirm-fee-row">
+      <text>配送费</text>
+      <text>¥{{deliveryFee}}</text>
+    </view>
+    <view class="confirm-fee-row confirm-fee-total">
+      <text>合计</text>
+      <text>¥{{totalAmount}}</text>
+    </view>
+    <view class="confirm-invoice">如需发票请移步首页拨打商家电话咨询</view>
+  </view>
+
+  <!-- 提交栏 -->
+  <view class="confirm-footer">
+    <view class="confirm-footer-amount">
+      <text class="confirm-footer-label">应付：</text>
+      <text class="confirm-footer-price">¥{{totalAmount}}</text>
+    </view>
+    <van-button type="primary" round loading="{{submitting}}" custom-class="confirm-submit" bind:click="onSubmit">提交订单</van-button>
+  </view>
+
+  <!-- 弹窗 -->
+  <delivery-time-popup show="{{timeVisible}}" bind:close="onCloseTime" bind:confirm="onTimeConfirm" />
+  <tableware-popup
+    show="{{tablewareVisible}}"
+    value="{{{status: tablewareStatus, number: tablewareNumber}}}"
+    bind:close="onCloseTableware"
+    bind:confirm="onTablewareConfirm"
+  />
+</view>

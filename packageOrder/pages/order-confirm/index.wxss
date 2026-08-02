@@ -1,0 +1,165 @@
+.confirm-page {
+  min-height: 100vh;
+  background: #f5f5f5;
+  padding-bottom: calc(160rpx + env(safe-area-inset-bottom));
+}
+
+.confirm-section {
+  background: #fff;
+  border-radius: 16rpx;
+  margin: 20rpx;
+  padding: 8rpx 0;
+}
+
+.confirm-address-empty {
+  display: flex;
+  align-items: center;
+  padding: 32rpx;
+}
+
+.confirm-address-empty-icon {
+  font-size: 48rpx;
+}
+
+.confirm-address-empty-text {
+  flex: 1;
+  margin-left: 16rpx;
+  color: #999;
+  font-size: 28rpx;
+}
+
+.confirm-address-empty-arrow {
+  color: #ccc;
+  font-size: 40rpx;
+}
+
+.confirm-remark-value {
+  max-width: 300rpx;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.confirm-goods-title {
+  font-size: 30rpx;
+  font-weight: 600;
+  padding: 16rpx 24rpx 0;
+}
+
+.confirm-goods-row {
+  display: flex;
+  align-items: center;
+  padding: 20rpx 24rpx;
+  border-bottom: 1rpx solid #f7f7f7;
+}
+
+.confirm-goods-img {
+  width: 96rpx;
+  height: 96rpx;
+  border-radius: 12rpx;
+  flex-shrink: 0;
+  background: #f5f5f5;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 40rpx;
+}
+
+.confirm-goods-info {
+  flex: 1;
+  margin: 0 16rpx;
+  min-width: 0;
+}
+
+.confirm-goods-name {
+  font-size: 28rpx;
+  color: #333;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.confirm-goods-flavor {
+  font-size: 22rpx;
+  color: #999;
+  margin-top: 4rpx;
+}
+
+.confirm-goods-price {
+  font-size: 26rpx;
+  color: #FF6B35;
+  margin-top: 6rpx;
+}
+
+.confirm-goods-count {
+  font-size: 26rpx;
+  color: #666;
+}
+
+.confirm-goods-toggle {
+  text-align: center;
+  color: #999;
+  font-size: 26rpx;
+  padding: 20rpx 0;
+}
+
+/* 费用明细 */
+.confirm-fee-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16rpx 24rpx;
+  font-size: 26rpx;
+  color: #666;
+}
+
+.confirm-fee-total {
+  font-size: 30rpx;
+  font-weight: 700;
+  color: #333;
+  border-top: 1rpx solid #f5f5f5;
+  padding-top: 20rpx;
+}
+
+.confirm-invoice {
+  padding: 8rpx 24rpx 20rpx;
+  font-size: 22rpx;
+  color: #bbb;
+}
+
+/* 提交栏 */
+.confirm-footer {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: #fff;
+  display: flex;
+  align-items: center;
+  padding: 20rpx 32rpx;
+  padding-bottom: calc(20rpx + env(safe-area-inset-bottom));
+  box-shadow: 0 -4rpx 16rpx rgba(0, 0, 0, 0.05);
+  z-index: 100;
+}
+
+.confirm-footer-amount {
+  flex: 1;
+  display: flex;
+  align-items: baseline;
+}
+
+.confirm-footer-label {
+  font-size: 26rpx;
+  color: #666;
+}
+
+.confirm-footer-price {
+  font-size: 40rpx;
+  color: #FF6B35;
+  font-weight: 700;
+}
+
+.confirm-submit {
+  width: 240rpx;
+  border-radius: 44rpx;
+}

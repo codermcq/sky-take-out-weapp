@@ -1,0 +1,82 @@
+:host {
+  display: block;
+}
+
+.address-card {
+  display: flex;
+  align-items: center;
+  background: #fff;
+  border-radius: 16rpx;
+  padding: 24rpx;
+  margin-bottom: 20rpx;
+  border: 2rpx solid transparent;
+}
+
+.address-card-selected {
+  border-color: #FF6B35;
+}
+
+.address-main {
+  flex: 1;
+  min-width: 0;
+}
+
+.address-head {
+  display: flex;
+  align-items: center;
+}
+
+.address-name {
+  font-size: 30rpx;
+  font-weight: 600;
+  color: #333;
+}
+
+.address-phone {
+  font-size: 26rpx;
+  color: #666;
+  margin-left: 16rpx;
+}
+
+.address-detail {
+  font-size: 26rpx;
+  color: #666;
+  margin-top: 10rpx;
+  line-height: 1.5;
+}
+
+.address-actions {
+  display: flex;
+  align-items: center;
+  gap: 24rpx;
+  flex-shrink: 0;
+  margin-left: 16rpx;
+}
+
+.address-action {
+  font-size: 24rpx;
+  color: #FF6B35;
+}
+
+.address-check {
+  width: 36rpx;
+  height: 36rpx;
+  border: 2rpx solid #ddd;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-left: 16rpx;
+  flex-shrink: 0;
+}
+
+.address-card-selected .address-check {
+  border-color: #FF6B35;
+}
+
+.address-card-selected .address-check-dot {
+  width: 20rpx;
+  height: 20rpx;
+  background: #FF6B35;
+  border-radius: 50%;
+}

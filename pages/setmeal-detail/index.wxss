@@ -1,0 +1,132 @@
+.setmeal-page {
+  min-height: 100vh;
+  background: #f5f5f5;
+  padding-bottom: calc(180rpx + env(safe-area-inset-bottom));
+}
+
+.setmeal-head {
+  display: flex;
+  background: #fff;
+  padding: 32rpx;
+}
+
+.setmeal-head-img {
+  width: 220rpx;
+  height: 220rpx;
+  border-radius: 16rpx;
+  flex-shrink: 0;
+  background: #f5f5f5;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 80rpx;
+}
+
+.setmeal-head-info {
+  flex: 1;
+  margin-left: 24rpx;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 8rpx 0;
+}
+
+.setmeal-head-name {
+  font-size: 34rpx;
+  font-weight: 700;
+  color: #333;
+}
+
+.setmeal-head-price {
+  font-size: 40rpx;
+  color: #FF6B35;
+  font-weight: 700;
+}
+
+.setmeal-section {
+  margin-top: 20rpx;
+  background: #fff;
+  padding: 24rpx 32rpx;
+}
+
+.setmeal-section-title {
+  font-size: 30rpx;
+  font-weight: 600;
+  margin-bottom: 16rpx;
+}
+
+.setmeal-dish {
+  display: flex;
+  align-items: center;
+  padding: 16rpx 0;
+  border-bottom: 1rpx solid #f5f5f5;
+}
+
+.setmeal-dish:last-child {
+  border-bottom: none;
+}
+
+.setmeal-dish-img {
+  width: 100rpx;
+  height: 100rpx;
+  border-radius: 12rpx;
+  flex-shrink: 0;
+  background: #f5f5f5;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 40rpx;
+}
+
+.setmeal-dish-info {
+  flex: 1;
+  margin-left: 16rpx;
+}
+
+.setmeal-dish-name {
+  font-size: 28rpx;
+  color: #333;
+}
+
+.setmeal-dish-meta {
+  margin-top: 8rpx;
+  display: flex;
+  align-items: center;
+}
+
+.setmeal-dish-price {
+  font-size: 26rpx;
+  color: #FF6B35;
+}
+
+.setmeal-dish-copies {
+  font-size: 22rpx;
+  color: #999;
+  margin-left: 12rpx;
+}
+
+/* 底部 */
+.setmeal-footer {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: #fff;
+  padding: 20rpx 32rpx;
+  padding-bottom: calc(20rpx + env(safe-area-inset-bottom));
+  display: flex;
+  align-items: center;
+  box-shadow: 0 -4rpx 16rpx rgba(0, 0, 0, 0.05);
+  z-index: 100;
+}
+
+.setmeal-footer van-button {
+  flex: 1;
+}
+
+.setmeal-footer-cart {
+  margin-left: 24rpx;
+  color: #FF6B35;
+  font-size: 28rpx;
+  padding: 8rpx;
+}

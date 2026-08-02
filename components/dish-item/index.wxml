@@ -1,0 +1,24 @@
+<view class="dish-item {{disabled ? 'is-disabled' : ''}}">
+  <image wx:if="{{dish.image}}" class="dish-img" src="{{dish.image}}" mode="aspectFill" bindtap="onTapItem" />
+  <view wx:else class="dish-img dish-img-placeholder" bindtap="onTapItem">🍽</view>
+  <view class="dish-info">
+    <view class="dish-name" bindtap="onTapItem">{{dish.name}}</view>
+    <view class="dish-desc" bindtap="onTapItem">{{dish.description || dish.name}}</view>
+    <view class="dish-bottom">
+      <view class="dish-price">¥{{dish.price}}</view>
+      <view wx:if="{{dish.flavor && dish.flavor.length}}" class="dish-flavor-btn" bindtap="onSelectFlavor">选择规格</view>
+      <view wx:else class="dish-stepper">
+        <van-stepper
+          value="{{count}}"
+          min="0"
+          integer
+          disable-input
+          disabled="{{disabled}}"
+          button-size="28"
+          theme="round"
+          bind:change="onStepperChange"
+        />
+      </view>
+    </view>
+  </view>
+</view>

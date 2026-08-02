@@ -1,0 +1,202 @@
+.home-page {
+  min-height: 100vh;
+  background: #f5f5f5;
+}
+
+/* 头部 */
+.home-header {
+  background: linear-gradient(180deg, #ff8a50 0%, #FF6B35 100%);
+  border-radius: 0 0 32rpx 32rpx;
+}
+
+.home-header-inner {
+  padding-bottom: 40rpx;
+}
+
+.home-shop-row {
+  display: flex;
+  align-items: center;
+  padding: 24rpx 32rpx;
+}
+
+.home-shop-name {
+  color: #fff;
+  font-size: 36rpx;
+  font-weight: 700;
+}
+
+.home-shop-status {
+  margin-left: 16rpx;
+  font-size: 22rpx;
+  color: #fff;
+  background: rgba(255, 255, 255, 0.25);
+  padding: 4rpx 16rpx;
+  border-radius: 20rpx;
+}
+
+.home-shop-status.is-closed {
+  background: rgba(0, 0, 0, 0.25);
+}
+
+.home-phone {
+  margin-left: auto;
+  font-size: 36rpx;
+  padding: 8rpx;
+}
+
+.home-search {
+  margin: 0 32rpx;
+  height: 72rpx;
+  background: #fff;
+  border-radius: 36rpx;
+  display: flex;
+  align-items: center;
+  padding: 0 24rpx;
+}
+
+.home-search-icon {
+  font-size: 28rpx;
+}
+
+.home-search-text {
+  margin-left: 12rpx;
+  color: #bbb;
+  font-size: 26rpx;
+}
+
+/* 内容区 */
+.home-content {
+  display: flex;
+  height: calc(100vh - 240rpx - env(safe-area-inset-bottom));
+  margin-top: 20rpx;
+}
+
+.home-cats {
+  width: 180rpx;
+  height: 100%;
+  background: #f0f0f0;
+  flex-shrink: 0;
+}
+
+.home-cat {
+  padding: 32rpx 16rpx;
+  text-align: center;
+  font-size: 26rpx;
+  color: #666;
+  position: relative;
+}
+
+.home-cat-active {
+  background: #fff;
+  color: #FF6B35;
+  font-weight: 600;
+}
+
+.home-cat-active::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 6rpx;
+  height: 40rpx;
+  background: #FF6B35;
+  border-radius: 0 6rpx 6rpx 0;
+}
+
+.home-cat-name {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.home-cat-tag {
+  font-size: 18rpx;
+  color: #FF6B35;
+  margin-top: 4rpx;
+}
+
+.home-goods {
+  flex: 1;
+  height: 100%;
+  padding: 20rpx;
+  box-sizing: border-box;
+}
+
+.home-goods-empty {
+  text-align: center;
+  color: #999;
+  font-size: 26rpx;
+  padding: 120rpx 0;
+}
+
+/* 拨打电话弹窗 */
+.phone-popup {
+  text-align: center;
+  padding: 48rpx 0 24rpx;
+  padding-bottom: calc(24rpx + env(safe-area-inset-bottom));
+}
+
+.phone-popup-title {
+  font-size: 30rpx;
+  color: #999;
+}
+
+.phone-popup-num {
+  font-size: 44rpx;
+  font-weight: 700;
+  color: #333;
+  margin: 16rpx 0 32rpx;
+}
+
+.phone-popup-btn {
+  height: 88rpx;
+  line-height: 88rpx;
+  background: #FF6B35;
+  color: #fff;
+  font-size: 30rpx;
+  margin: 0 32rpx;
+  border-radius: 44rpx;
+}
+
+.phone-popup-cancel {
+  height: 88rpx;
+  line-height: 88rpx;
+  color: #666;
+  font-size: 28rpx;
+}
+
+/* 休息中遮罩 */
+.closed-mask {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(255, 255, 255, 0.92);
+  z-index: 999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.closed-box {
+  text-align: center;
+}
+
+.closed-icon {
+  font-size: 120rpx;
+}
+
+.closed-text {
+  font-size: 40rpx;
+  font-weight: 700;
+  color: #333;
+  margin-top: 24rpx;
+}
+
+.closed-sub {
+  font-size: 26rpx;
+  color: #999;
+  margin-top: 12rpx;
+}

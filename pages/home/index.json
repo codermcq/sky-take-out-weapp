@@ -1,0 +1,15 @@
+{
+  "usingComponents": {
+    "nav-bar": "/components/nav-bar/index",
+    "dish-item": "/components/dish-item/index",
+    "setmeal-item": "/components/setmeal-item/index",
+    "cart-bar": "/components/cart-bar/index",
+    "cart-popup": "/components/cart-popup/index",
+    "flavor-select-popup": "/components/flavor-select-popup/index",
+    "product-detail-popup": "/components/product-detail-popup/index",
+    "van-popup": "@vant/weapp/popup/index",
+    "van-icon": "@vant/weapp/icon/index"
+  },
+  "enablePullDownRefresh": true,
+  "navigationStyle": "custom"
+}

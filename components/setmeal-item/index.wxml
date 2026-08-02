@@ -1,0 +1,11 @@
+<view class="setmeal-item {{disabled ? 'is-disabled' : ''}}" bindtap="onTap">
+  <image wx:if="{{setmeal.image}}" class="setmeal-img" src="{{setmeal.image}}" mode="aspectFill" />
+  <view wx:else class="setmeal-img setmeal-img-placeholder">🍱</view>
+  <view class="setmeal-info">
+    <view class="setmeal-name">{{setmeal.name}}</view>
+    <view class="setmeal-desc">{{setmeal.description || setmeal.name}}</view>
+    <view class="setmeal-bottom">
+      <view class="setmeal-price">¥{{setmeal.price}}</view>
+    </view>
+  </view>
+</view>

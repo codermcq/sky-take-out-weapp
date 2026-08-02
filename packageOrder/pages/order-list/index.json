@@ -1,0 +1,11 @@
+{
+  "usingComponents": {
+    "nav-bar": "/components/nav-bar/index",
+    "order-card": "/components/order-card/index",
+    "empty-view": "/components/empty-view/index",
+    "van-tabs": "@vant/weapp/tabs/index",
+    "van-tab": "@vant/weapp/tab/index",
+    "van-loading": "@vant/weapp/loading/index"
+  },
+  "navigationStyle": "custom"
+}

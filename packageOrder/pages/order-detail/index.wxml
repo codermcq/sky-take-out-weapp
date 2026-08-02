@@ -1,0 +1,68 @@
+<view class="detail-page">
+  <nav-bar title="订单详情" />
+
+  <van-loading wx:if="{{loading}}" custom-style="margin: 120rpx auto;" />
+
+  <block wx:elif="{{order}}">
+    <!-- 状态头 -->
+    <view class="detail-status">
+      <view class="detail-status-text">{{statusText}}</view>
+      <view class="detail-status-sub">
+        <text wx:if="{{order.status === 1}}">等待付款</text>
+        <text wx:elif="{{order.status === 6 && order.payStatus === 2}}">退款成功</text>
+        <text wx:else>{{order.estimatedDeliveryTime ? '预计送达 ' + order.estimatedDeliveryTime : '感谢您的信任'}}</text>
+      </view>
+    </view>
+
+    <!-- 收货信息 -->
+    <view class="detail-section">
+      <view class="detail-addr-row">
+        <view class="detail-addr-icon">📍</view>
+        <view class="detail-addr-info">
+          <view class="detail-addr-line1">{{order.consignee}} {{order.phone}}</view>
+          <view class="detail-addr-line2">{{order.address}}</view>
+        </view>
+      </view>
+      <van-cell title="订单编号" value="{{order.number}}" />
+      <van-cell title="下单时间" value="{{order.orderTime}}" />
+      <van-cell wx:if="{{order.remark}}" title="备注" value="{{order.remark}}" value-class="detail-remark" />
+    </view>
+
+    <!-- 商品清单 -->
+    <view class="detail-section">
+      <view class="detail-goods-title">商品清单</view>
+      <view wx:for="{{order.orderDetailList}}" wx:key="id" class="detail-goods-row">
+        <image wx:if="{{item.image}}" class="detail-goods-img" src="{{item.image}}" mode="aspectFill" />
+        <view wx:else class="detail-goods-img detail-goods-img-ph">🍽</view>
+        <view class="detail-goods-info">
+          <view class="detail-goods-name">{{item.name}}</view>
+          <view wx:if="{{item.dishFlavor}}" class="detail-goods-flavor">{{item.dishFlavor}}</view>
+        </view>
+        <view class="detail-goods-count">x{{item.number}}</view>
+        <view class="detail-goods-price">¥{{item.amount}}</view>
+      </view>
+    </view>
+
+    <!-- 金额 -->
+    <view class="detail-section">
+      <view class="detail-fee-row"><text>商品金额</text><text>¥{{goodsPrice}}</text></view>
+      <view class="detail-fee-row detail-fee-total"><text>实付</text><text>¥{{order.amount}}</text></view>
+    </view>
+
+    <!-- 操作区 -->
+    <view class="detail-actions">
+      <van-button wx:if="{{order.status === 1}}" type="primary" round block custom-class="detail-action-btn" bind:click="onGoPay">立即支付</van-button>
+      <view class="detail-action-row">
+        <van-button wx:if="{{order.status === 1 || order.status === 2}}" size="small" round data-type="cancel" bind:click="onAction">取消订单</van-button>
+        <van-button wx:if="{{order.status === 2}}" size="small" round type="primary" data-type="reminder" bind:click="onAction">催单</van-button>
+        <van-button wx:if="{{order.status === 3 || order.status === 4}}" size="small" round data-type="cancel" bind:click="onAction">取消订单</van-button>
+        <van-button wx:if="{{order.status === 5}}" size="small" round type="primary" data-type="refund" bind:click="onAction">申请退款</van-button>
+        <van-button wx:if="{{order.status === 1 || order.status === 5 || order.status === 6}}" size="small" round data-type="repeat" bind:click="onAction">再来一单</van-button>
+      </view>
+    </view>
+  </block>
+
+  <view wx:else class="detail-empty">
+    <empty-view type="order" text="订单不存在或已被删除" btn-text="回首页" bind:btn="onGoHome" />
+  </view>
+</view>

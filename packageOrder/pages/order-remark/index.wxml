@@ -1,0 +1,20 @@
+<view class="remark-page">
+  <nav-bar title="订单备注" />
+
+  <view class="remark-box">
+    <textarea
+      class="remark-textarea"
+      value="{{remark}}"
+      maxlength="{{maxLen}}"
+      placeholder="备注口味偏好、送餐要求等（最多50字）"
+      bindinput="onRemarkInput"
+    />
+    <view class="remark-clear" bindtap="onClear">清空</view>
+  </view>
+
+  <view class="remark-count">{{remark.length}}/{{maxLen}}</view>
+
+  <view class="remark-footer">
+    <van-button type="primary" round block bind:click="onDone">完成</van-button>
+  </view>
+</view>

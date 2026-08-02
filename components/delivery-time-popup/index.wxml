@@ -1,0 +1,34 @@
+<van-popup show="{{show}}" position="bottom" custom-style="border-radius: 24rpx 24rpx 0 0;" bind:close="onClose">
+  <view class="time-popup">
+    <view class="time-header">
+      <view class="time-title">选择配送时间</view>
+      <view class="time-close" bindtap="onClose" catchtap="onNoop">✕</view>
+    </view>
+
+    <view class="time-date-tabs">
+      <view
+        wx:for="{{dates}}"
+        wx:key="value"
+        class="time-date-tab {{activeDateIndex === index ? 'time-date-tab-active' : ''}}"
+        data-index="{{index}}"
+        bindtap="onSelectDate"
+        catchtap="onNoop"
+      >{{item.label}}</view>
+    </view>
+
+    <scroll-view class="time-slot-list" scroll-y enhanced show-scrollbar="{{false}}">
+      <view
+        wx:for="{{slots}}"
+        wx:key="*this"
+        class="time-slot {{activeSlotIndex === index ? 'time-slot-active' : ''}}"
+        data-index="{{index}}"
+        bindtap="onSelectSlot"
+        catchtap="onNoop"
+      >{{item}}</view>
+    </scroll-view>
+
+    <view class="time-footer">
+      <van-button type="primary" block round bind:click="onConfirm">确定</van-button>
+    </view>
+  </view>
+</van-popup>

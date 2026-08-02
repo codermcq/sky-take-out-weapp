@@ -1,0 +1,31 @@
+<van-popup show="{{show}}" position="bottom" custom-style="border-radius: 24rpx 24rpx 0 0;" bind:close="onClose">
+  <view class="flavor-popup">
+    <view class="flavor-header">
+      <view class="flavor-title">选择{{dish.name}}规格</view>
+      <view class="flavor-close" bindtap="onClose" catchtap="onNoop">✕</view>
+    </view>
+
+    <scroll-view class="flavor-body" scroll-y enhanced show-scrollbar="{{false}}">
+      <view wx:for="{{groups}}" wx:key="name" wx:for-item="group" wx:for-index="gi" class="flavor-group">
+        <view class="flavor-group-name">{{group.name}}</view>
+        <view class="flavor-options">
+          <view
+            wx:for="{{group.options}}"
+            wx:key="*this"
+            wx:for-item="opt"
+            wx:for-index="oi"
+            class="flavor-option {{group.selected === opt ? 'flavor-option-active' : ''}}"
+            data-group="{{gi}}"
+            data-value="{{opt}}"
+            bindtap="onSelectOption"
+            catchtap="onNoop"
+          >{{opt}}</view>
+        </view>
+      </view>
+    </scroll-view>
+
+    <view class="flavor-footer">
+      <van-button type="primary" block round bind:click="onConfirm">确定</van-button>
+    </view>
+  </view>
+</van-popup>

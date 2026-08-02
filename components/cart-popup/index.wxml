@@ -1,0 +1,39 @@
+<van-popup show="{{show}}" position="bottom" custom-style="border-radius: 24rpx 24rpx 0 0;" bind:close="onClose">
+  <view class="cart-popup">
+    <view class="cart-popup-header">
+      <view class="cart-popup-title">已选商品</view>
+      <view class="cart-popup-clear" bindtap="onClear" catchtap="onNoop">清空</view>
+    </view>
+
+    <scroll-view wx:if="{{cartList.length}}" class="cart-popup-body" scroll-y enhanced show-scrollbar="{{false}}">
+      <view wx:for="{{cartList}}" wx:key="id" class="cart-row">
+        <image wx:if="{{item.image}}" class="cart-row-img" src="{{item.image}}" mode="aspectFill" />
+        <view wx:else class="cart-row-img cart-row-img-ph">🍽</view>
+        <view class="cart-row-info">
+          <view class="cart-row-name">{{item.name}}</view>
+          <view wx:if="{{item.dishFlavor}}" class="cart-row-flavor">{{item.dishFlavor}}</view>
+          <view class="cart-row-price">¥{{item.amount}}</view>
+        </view>
+        <van-stepper
+          value="{{item.number}}"
+          min="0"
+          integer
+          disable-input
+          button-size="28"
+          theme="round"
+          data-id="{{item.id}}"
+          bind:change="onStepperChange"
+        />
+      </view>
+    </scroll-view>
+
+    <van-empty wx:else description="购物车是空的" />
+
+    <view class="cart-popup-footer">
+      <view class="cart-popup-total">
+        合计：<text class="cart-popup-price">¥{{totalPrice}}</text>
+      </view>
+      <view class="cart-popup-settle" bindtap="onSettle" catchtap="onNoop">去结算</view>
+    </view>
+  </view>
+</van-popup>

@@ -1,0 +1,12 @@
+{
+  "usingComponents": {
+    "nav-bar": "/components/nav-bar/index",
+    "empty-view": "/components/empty-view/index",
+    "van-checkbox": "@vant/weapp/checkbox/index",
+    "van-stepper": "@vant/weapp/stepper/index",
+    "van-swipe-cell": "@vant/weapp/swipe-cell/index",
+    "van-button": "@vant/weapp/button/index",
+    "van-icon": "@vant/weapp/icon/index"
+  },
+  "navigationStyle": "custom"
+}

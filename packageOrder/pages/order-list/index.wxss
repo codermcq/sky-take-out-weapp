@@ -1,0 +1,15 @@
+.order-list-page {
+  min-height: 100vh;
+  background: #f5f5f5;
+}
+
+.order-list-body {
+  padding: 20rpx;
+}
+
+.order-list-more {
+  text-align: center;
+  color: #999;
+  font-size: 24rpx;
+  padding: 24rpx 0;
+}

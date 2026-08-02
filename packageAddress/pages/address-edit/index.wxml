@@ -1,0 +1,70 @@
+<view class="edit-page">
+  <nav-bar title="{{editId ? '编辑地址' : '新增地址'}}" />
+
+  <van-cell-group inset custom-class="edit-group">
+    <van-field
+      label="联系人"
+      value="{{consignee}}"
+      maxlength="12"
+      placeholder="请输入联系人（最多12字）"
+      bind:change="onNameInput"
+    />
+    <van-field
+      label="手机号"
+      value="{{phone}}"
+      type="number"
+      maxlength="11"
+      placeholder="请输入手机号"
+      bind:change="onPhoneInput"
+    />
+    <van-field
+      label="省市区"
+      value="{{provinceName}}{{cityName}}{{districtName}}"
+      placeholder="请选择省市区"
+      is-link
+      readonly
+      bind:click="onOpenRegion"
+    />
+    <van-field
+      label="详细地址"
+      value="{{detail}}"
+      type="textarea"
+      autosize
+      placeholder="街道、楼牌号等（左对齐显示）"
+      bind:change="onDetailInput"
+    />
+  </van-cell-group>
+
+  <!-- 标签 -->
+  <view class="edit-section">
+    <view class="edit-section-label">标签</view>
+    <view class="edit-labels">
+      <view
+        wx:for="{{labels}}"
+        wx:key="*this"
+        class="edit-label {{label === item ? 'edit-label-active' : ''}}"
+        data-label="{{item}}"
+        bindtap="onSelectLabel"
+      >{{item}}</view>
+    </view>
+  </view>
+
+  <!-- 默认地址 -->
+  <view class="edit-section edit-default">
+    <view class="edit-default-text">设为默认地址</view>
+    <van-switch value="{{isDefault}}" color="#FF6B35" bind:change="onToggleDefault" />
+  </view>
+
+  <!-- 操作 -->
+  <view class="edit-actions">
+    <van-button type="primary" round block custom-class="edit-save-btn" bind:click="onSave">保存地址</van-button>
+    <van-button wx:if="{{editId}}" round block custom-style="margin-top:20rpx;color:#ee0a24;border-color:#ee0a24;" bind:click="onDelete">删除地址</van-button>
+  </view>
+
+  <region-picker
+    show="{{regionVisible}}"
+    value="{{regionValue}}"
+    bind:close="onCloseRegion"
+    bind:confirm="onRegionConfirm"
+  />
+</view>

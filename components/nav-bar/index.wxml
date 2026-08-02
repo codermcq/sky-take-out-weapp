@@ -1,0 +1,11 @@
+<van-nav-bar
+  title="{{title}}"
+  left-text="{{showBack ? '返回' : ''}}"
+  left-arrow="{{showBack}}"
+  fixed
+  placeholder
+  background="{{bgColor}}"
+  color="{{color}}"
+  custom-style="{{customStyle}}"
+  bind:click-left="onBack"
+/>

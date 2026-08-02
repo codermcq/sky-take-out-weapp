@@ -1,0 +1,46 @@
+.tableware-popup {
+  padding: 32rpx;
+  padding-bottom: calc(32rpx + env(safe-area-inset-bottom));
+}
+
+.tableware-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.tableware-title {
+  font-size: 32rpx;
+  font-weight: 600;
+}
+
+.tableware-close {
+  font-size: 32rpx;
+  color: #999;
+  padding: 8rpx;
+}
+
+.tableware-options {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16rpx;
+  margin-top: 24rpx;
+}
+
+.tableware-option {
+  padding: 12rpx 32rpx;
+  background: #f5f5f5;
+  color: #333;
+  font-size: 26rpx;
+  border-radius: 32rpx;
+}
+
+.tableware-option-active {
+  background: #fff0e8;
+  color: #FF6B35;
+  border: 1rpx solid #FF6B35;
+}
+
+.tableware-footer {
+  margin-top: 24rpx;
+}

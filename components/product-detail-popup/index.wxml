@@ -1,0 +1,26 @@
+<van-popup show="{{show}}" position="bottom" custom-style="border-radius: 24rpx 24rpx 0 0;" bind:close="onClose">
+  <view class="detail-popup" wx:if="{{dish.id}}">
+    <image wx:if="{{dish.image}}" class="detail-img" src="{{dish.image}}" mode="aspectFill" />
+    <view wx:else class="detail-img detail-img-ph">🍽</view>
+    <view class="detail-body">
+      <view class="detail-close" bindtap="onClose" catchtap="onNoop">✕</view>
+      <view class="detail-name">{{dish.name}}</view>
+      <view class="detail-desc">{{dish.description || dish.name}}</view>
+      <view class="detail-price-row">
+        <view class="detail-price">¥{{dish.price}}</view>
+        <view wx:if="{{dish.flavor && dish.flavor.length}}" class="detail-flavor-btn" bindtap="onSelectFlavor" catchtap="onNoop">选择规格</view>
+        <van-stepper
+          wx:else
+          value="{{count}}"
+          min="0"
+          integer
+          disable-input
+          button-size="30"
+          theme="round"
+          bind:change="onStepperChange"
+        />
+      </view>
+      <view class="detail-tip">说明：本店菜品均由商家现做，预计送达时间以下单时为准。</view>
+    </view>
+  </view>
+</van-popup>

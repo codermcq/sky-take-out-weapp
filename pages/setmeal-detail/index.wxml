@@ -1,0 +1,36 @@
+<view class="setmeal-page">
+  <nav-bar title="{{setmeal.name}}" />
+
+  <!-- 头部套餐信息 -->
+  <view class="setmeal-head">
+    <image wx:if="{{setmeal.image}}" class="setmeal-head-img" src="{{setmeal.image}}" mode="aspectFill" />
+    <view wx:else class="setmeal-head-img setmeal-head-ph">🍱</view>
+    <view class="setmeal-head-info">
+      <view class="setmeal-head-name">{{setmeal.name}}</view>
+      <view class="setmeal-head-price">¥{{setmeal.price}}</view>
+    </view>
+  </view>
+
+  <!-- 套餐内菜品 -->
+  <view class="setmeal-section">
+    <view class="setmeal-section-title">套餐内容</view>
+    <van-loading wx:if="{{loading}}" custom-style="margin: 80rpx auto;" />
+    <view wx:for="{{dishes}}" wx:key="dishId" class="setmeal-dish">
+      <image wx:if="{{item.image}}" class="setmeal-dish-img" src="{{item.image}}" mode="aspectFill" />
+      <view wx:else class="setmeal-dish-img setmeal-dish-ph">🍽</view>
+      <view class="setmeal-dish-info">
+        <view class="setmeal-dish-name">{{item.name}}</view>
+        <view class="setmeal-dish-meta">
+          <text class="setmeal-dish-price">¥{{item.price}}</text>
+          <text class="setmeal-dish-copies">x{{item.copies}}</text>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 底部操作 -->
+  <view class="setmeal-footer">
+    <van-button type="primary" round block loading="{{adding}}" bind:click="onAdd">加入购物车</van-button>
+    <view class="setmeal-footer-cart" bindtap="onGoCart">去购物车</view>
+  </view>
+</view>

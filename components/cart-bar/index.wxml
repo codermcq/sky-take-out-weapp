@@ -1,0 +1,13 @@
+<view class="cart-bar" bindtap="onTap">
+  <view class="cart-left">
+    <view class="cart-icon-wrap">
+      <view class="cart-icon">🛒</view>
+      <view wx:if="{{totalCount > 0}}" class="cart-badge">{{totalCount > 99 ? '99+' : totalCount}}</view>
+    </view>
+    <view class="cart-total">
+      <view class="cart-total-label">{{totalCount > 0 ? '已选' : '未点餐'}}</view>
+      <view class="cart-total-price">¥{{totalPrice}}</view>
+    </view>
+  </view>
+  <view class="cart-right {{totalCount > 0 ? 'cart-right-active' : ''}}">去结算</view>
+</view>

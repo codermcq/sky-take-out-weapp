@@ -1,0 +1,20 @@
+<view class="address-card {{selected ? 'address-card-selected' : ''}}" bindtap="onTap">
+  <view class="address-main">
+    <view class="address-head">
+      <view class="address-name">{{address.consignee}}</view>
+      <view class="address-phone">{{address.phone}}</view>
+      <van-tag wx:if="{{address.label}}" color="#f0f0f0" text-color="#666" custom-style="margin-left:12rpx;">{{address.label}}</van-tag>
+    </view>
+    <view class="address-detail">{{fullAddress}}</view>
+  </view>
+
+  <view wx:if="{{manage}}" class="address-actions" catchtap="onNoop">
+    <view wx:if="{{!address.isDefault}}" class="address-action" bindtap="onSetDefault">设为默认</view>
+    <van-icon name="edit" size="22" color="#999" bindtap="onEdit" />
+    <van-icon name="delete" size="22" color="#999" bindtap="onDelete" />
+  </view>
+
+  <view wx:elif="{{selected}}" class="address-check">
+    <view class="address-check-dot"></view>
+  </view>
+</view>

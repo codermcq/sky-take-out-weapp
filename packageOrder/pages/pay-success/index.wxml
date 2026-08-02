@@ -1,0 +1,14 @@
+<view class="success-page">
+  <view class="success-box">
+    <view class="success-icon">✅</view>
+    <view class="success-title">下单成功</view>
+    <view class="success-desc">预计送达时间：{{estimatedTime}}</view>
+    <view class="success-amount">¥{{amount}}</view>
+    <view class="success-no">订单号：{{orderNumber}}</view>
+  </view>
+
+  <view class="success-actions">
+    <van-button type="primary" round block custom-class="success-btn" bind:click="onViewOrder">查看订单</van-button>
+    <van-button plain round block custom-class="success-btn" custom-style="color:#666;border-color:#ddd;" bind:click="onGoHome">返回首页</van-button>
+  </view>
+</view>

@@ -1,0 +1,103 @@
+.pay-page {
+  min-height: 100vh;
+  background: #f5f5f5;
+}
+
+.pay-tip {
+  background: #fff7e6;
+  color: #ad6800;
+  font-size: 24rpx;
+  text-align: center;
+  padding: 20rpx;
+}
+
+.pay-tip-expired {
+  background: #f0f0f0;
+  color: #999;
+}
+
+.pay-card {
+  margin: 20rpx;
+  background: #fff;
+  border-radius: 16rpx;
+  padding: 48rpx 32rpx;
+  text-align: center;
+}
+
+.pay-card-amount {
+  display: flex;
+  flex-direction: column;
+}
+
+.pay-card-amount-label {
+  font-size: 24rpx;
+  color: #999;
+}
+
+.pay-card-amount-value {
+  font-size: 72rpx;
+  font-weight: 700;
+  color: #FF6B35;
+  margin-top: 12rpx;
+}
+
+.pay-card-no {
+  font-size: 24rpx;
+  color: #bbb;
+  margin-top: 24rpx;
+}
+
+.pay-method {
+  margin: 20rpx;
+  background: #fff;
+  border-radius: 16rpx;
+  padding: 24rpx 32rpx;
+}
+
+.pay-method-title {
+  font-size: 28rpx;
+  font-weight: 600;
+  margin-bottom: 16rpx;
+}
+
+.pay-method-item {
+  display: flex;
+  align-items: center;
+  padding: 16rpx 0;
+}
+
+.pay-method-icon {
+  font-size: 40rpx;
+}
+
+.pay-method-name {
+  flex: 1;
+  margin-left: 16rpx;
+  font-size: 28rpx;
+}
+
+.pay-method-selected {
+  color: #FF6B35;
+  font-size: 32rpx;
+  font-weight: 700;
+}
+
+.pay-actions {
+  margin: 40rpx 32rpx;
+}
+
+.pay-cancel {
+  text-align: center;
+  color: #666;
+  font-size: 28rpx;
+  margin-top: 32rpx;
+  padding: 8rpx;
+}
+
+.pay-home {
+  text-align: center;
+  color: #999;
+  font-size: 26rpx;
+  margin-top: 8rpx;
+  padding: 8rpx;
+}

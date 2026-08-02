@@ -1,0 +1,10 @@
+{
+  "usingComponents": {
+    "nav-bar": "/components/nav-bar/index",
+    "address-card": "/components/address-card/index",
+    "empty-view": "/components/empty-view/index",
+    "van-button": "@vant/weapp/button/index",
+    "van-loading": "@vant/weapp/loading/index"
+  },
+  "navigationStyle": "custom"
+}
