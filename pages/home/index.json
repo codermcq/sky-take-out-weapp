@@ -7,6 +7,7 @@
     "cart-popup": "/components/cart-popup/index",
     "flavor-select-popup": "/components/flavor-select-popup/index",
     "product-detail-popup": "/components/product-detail-popup/index",
+    "setmeal-popup": "/components/setmeal-popup/index",
     "van-popup": "@vant/weapp/popup/index",
     "van-icon": "@vant/weapp/icon/index"
   },

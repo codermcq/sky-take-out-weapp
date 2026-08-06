@@ -2,7 +2,6 @@
 import userStore from './store/userStore'
 import shopStore from './store/shopStore'
 import shopCartStore from './store/shopCartStore'
-import { isLoggedIn } from './utils/auth'
 
 /**
  * 进入小程序即自动微信登录。
@@ -42,15 +41,9 @@ App<IAppOption>({
     this.globalData.statusBarHeight = windowInfo.statusBarHeight
     this.globalData.contentHeight = windowInfo.screenHeight - windowInfo.statusBarHeight - this.globalData.navigationBarHeight
 
-    // 初始化登录态
-    userStore.dispatch('loadStateFromStorage')
     // 拉取营业状态
     shopStore.dispatch('fetchStatusAction')
-    // 已登录则拉购物车并同步角标；未登录则进入即自动登录
-    if (isLoggedIn()) {
-      shopCartStore.dispatch('fetchCartAction')
-    } else {
-      autoLogin()
-    }
+    // 每次启动都自动微信登录，确保 token 新鲜
+    autoLogin()
   },
 })

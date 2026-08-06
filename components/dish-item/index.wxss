@@ -8,6 +8,8 @@
   background: #fff;
   border-radius: 16rpx;
   margin-bottom: 20rpx;
+  overflow: hidden;
+  box-sizing: border-box;
 }
 
 .dish-item.is-disabled {
@@ -67,16 +69,16 @@
 
 .dish-flavor-btn,
 .dish-add-btn {
-  padding: 8rpx 28rpx;
+  padding: 6rpx 20rpx;
   background: #FF6B35;
   color: #fff;
-  font-size: 24rpx;
-  border-radius: 28rpx;
+  font-size: 22rpx;
+  border-radius: 24rpx;
   line-height: 1.4;
 }
 
 .dish-add-btn {
-  font-size: 32rpx;
+  font-size: 28rpx;
   font-weight: 700;
-  padding: 4rpx 24rpx;
+  padding: 2rpx 18rpx;
 }

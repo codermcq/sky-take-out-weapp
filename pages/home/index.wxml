@@ -82,6 +82,14 @@
     bind:confirm="onFlavorConfirm"
   />
 
+  <!-- 套餐详情弹窗 -->
+  <setmeal-popup
+    show="{{setmealVisible}}"
+    setmeal="{{currentSetmeal}}"
+    bind:close="onCloseSetmeal"
+    bind:add="onAddSetmeal"
+  />
+
   <!-- 商品详情弹窗 -->
   <product-detail-popup
     show="{{detailVisible}}"

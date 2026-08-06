@@ -28,6 +28,8 @@ Page({
     flavorVisible: false,
     detailVisible: false,
     phoneVisible: false,
+    setmealVisible: false,
+    currentSetmeal: null as any,
     currentDish: null as any,
     flavorDish: null as any,
     shopPhone: SHOP_PHONE,
@@ -141,7 +143,27 @@ Page({
 
   onSetmealTap(e: WechatMiniprogram.CustomEvent) {
     const { setmeal } = e.detail
-    wx.navigateTo({ url: `/pages/setmeal-detail/index?id=${setmeal.id}` })
+    this.setData({ currentSetmeal: setmeal, setmealVisible: true })
+  },
+
+  onCloseSetmeal() {
+    this.setData({ setmealVisible: false })
+  },
+
+  async onAddSetmeal(e: WechatMiniprogram.CustomEvent) {
+    const { setmeal } = e.detail
+    if (this.data.shopStatus !== 1) return
+    const ok = await ensureLogin()
+    if (!ok) return
+    shopCartStore.dispatch('addAction', {
+      setmealId: setmeal.id,
+      name: setmeal.name,
+      image: setmeal.image,
+      amount: setmeal.price,
+      number: 1,
+    })
+    this.setData({ setmealVisible: false })
+    wx.showToast({ title: '已加入购物车', icon: 'success' })
   },
 
   onOpenDetail(e: WechatMiniprogram.CustomEvent) {

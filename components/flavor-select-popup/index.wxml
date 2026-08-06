@@ -23,7 +23,7 @@
     </scroll-view>
 
     <view class="flavor-footer">
-      <van-button type="warning" block round bind:click="onConfirm">加入购物车</van-button>
+      <van-button type="warning" block round custom-style="border-radius: 40rpx !important; height: 76rpx; font-size: 28rpx;" bind:click="onConfirm">加入购物车</van-button>
     </view>
   </view>
 </van-popup>

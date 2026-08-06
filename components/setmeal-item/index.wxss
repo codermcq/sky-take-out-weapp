@@ -8,6 +8,8 @@
   background: #fff;
   border-radius: 16rpx;
   margin-bottom: 20rpx;
+  overflow: hidden;
+  box-sizing: border-box;
 }
 
 .setmeal-item.is-disabled {

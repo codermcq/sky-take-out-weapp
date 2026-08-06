@@ -1,0 +1,37 @@
+<van-popup show="{{show}}" position="center" custom-style="border-radius: 24rpx; width: 90%; max-height: 75vh;" bind:close="onClose">
+  <view class="sm-popup">
+    <!-- 头部 -->
+    <view class="sm-header">
+      <view class="sm-header-info">
+        <view class="sm-name">{{setmeal.name}}</view>
+        <view class="sm-desc">{{setmeal.description || setmeal.name}}</view>
+      </view>
+      <view class="sm-close" catchtap="onClose">✕</view>
+    </view>
+
+    <!-- 套餐图 -->
+    <view class="sm-image-area">
+      <image wx:if="{{setmeal.image}}" class="sm-image" src="{{setmeal.image}}" mode="aspectFill" />
+      <view wx:else class="sm-image sm-image-ph">🍱</view>
+      <view class="sm-price-tag">¥{{setmeal.price}}</view>
+    </view>
+
+    <!-- 菜品横向滑动 -->
+    <view class="sm-section-title">套餐内容</view>
+    <van-loading wx:if="{{loading}}" custom-style="margin: 40rpx auto;" />
+    <scroll-view wx:else class="sm-dish-scroll" scroll-x enhanced show-scrollbar="{{false}}">
+      <view wx:for="{{dishes}}" wx:key="name" class="sm-dish-card">
+        <image wx:if="{{item.image}}" class="sm-dish-img" src="{{item.image}}" mode="aspectFill" />
+        <view wx:else class="sm-dish-img sm-dish-img-ph">🍽</view>
+        <view class="sm-dish-name">{{item.name}}</view>
+        <view wx:if="{{item.description}}" class="sm-dish-desc">{{item.description}}</view>
+        <view class="sm-dish-copies">{{item.copies}}份</view>
+      </view>
+    </scroll-view>
+
+    <!-- 加入购物车 -->
+    <view class="sm-footer">
+      <van-button type="warning" block round custom-style="border-radius: 40rpx !important; height: 76rpx; font-size: 28rpx;" bind:click="onAdd">加入购物车</van-button>
+    </view>
+  </view>
+</van-popup>

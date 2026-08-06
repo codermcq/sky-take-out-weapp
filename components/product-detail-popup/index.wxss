@@ -20,14 +20,14 @@
   position: absolute;
   top: 20rpx;
   right: 24rpx;
-  width: 56rpx;
-  height: 56rpx;
-  line-height: 56rpx;
+  width: 44rpx;
+  height: 44rpx;
+  line-height: 44rpx;
   text-align: center;
   background: rgba(0, 0, 0, 0.4);
   color: #fff;
   border-radius: 50%;
-  font-size: 28rpx;
+  font-size: 24rpx;
 }
 
 .detail-name {
@@ -57,11 +57,11 @@
 }
 
 .detail-flavor-btn {
-  padding: 14rpx 44rpx;
+  padding: 10rpx 32rpx;
   background: #FF6B35;
   color: #fff;
-  font-size: 28rpx;
-  border-radius: 36rpx;
+  font-size: 24rpx;
+  border-radius: 30rpx;
 }
 
 .detail-tip {
