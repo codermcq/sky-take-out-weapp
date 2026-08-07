@@ -99,3 +99,38 @@ class MqRequest {
 }
 
 export const mqRequest = new MqRequest(BASE_URL)
+
+/**
+ * 文件上传：使用 wx.uploadFile，携带 token，返回服务器 URL
+ */
+export function mqUpload(filePath: string, url: string): Promise<string> {
+  const token = wx.getStorageSync(TOKEN_KEY)
+  const header: Record<string, string> = {}
+  if (token) header[TOKEN_KEY] = token
+
+  return new Promise((resolve, reject) => {
+    wx.uploadFile({
+      url: BASE_URL + url,
+      filePath,
+      name: 'file',
+      header,
+      success(res) {
+        try {
+          const body = JSON.parse(res.data)
+          if (body.code === 1) {
+            resolve(body.data as string)
+          } else {
+            wx.showToast({ title: body.msg || '上传失败', icon: 'none' })
+            reject(body.msg || '上传失败')
+          }
+        } catch {
+          reject('解析响应失败')
+        }
+      },
+      fail(err) {
+        wx.showToast({ title: '上传失败', icon: 'none' })
+        reject(err)
+      },
+    })
+  })
+}

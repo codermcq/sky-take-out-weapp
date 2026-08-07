@@ -1,20 +1,38 @@
-<view class="address-card {{selected ? 'address-card-selected' : ''}}" bindtap="onTap">
-  <view class="address-main">
-    <view class="address-head">
-      <view class="address-name">{{address.consignee}}</view>
-      <view class="address-phone">{{address.phone}}</view>
-      <van-tag wx:if="{{address.label}}" color="#f0f0f0" text-color="#666" custom-style="margin-left:12rpx;">{{address.label}}</van-tag>
+<view class="address-card {{selected ? 'address-card-selected' : ''}}">
+  <!-- 主体区域，点击选中 -->
+  <view class="address-body" bindtap="onTap">
+    <view class="address-main">
+      <!-- 第一行：标签 + 详细地址 -->
+      <view class="address-row1">
+        <van-tag wx:if="{{address.label}}" color="#f0f0f0" text-color="#666" custom-style="margin-right:10rpx;flex-shrink:0;">{{address.label}}</van-tag>
+        <text class="address-detail">{{fullAddress}}</text>
+      </view>
+      <!-- 第二行：姓氏+先生/女士 + 电话 -->
+      <view class="address-row2">
+        <text class="address-name">{{surname}}{{genderLabel}}</text>
+        <text class="address-phone">{{address.phone}}</text>
+      </view>
     </view>
-    <view class="address-detail">{{fullAddress}}</view>
+
+    <!-- 管理模式：编辑/删除/设为默认 -->
+    <view wx:if="{{manage}}" class="address-actions" catchtap="onNoop">
+      <view wx:if="{{!address.isDefault}}" class="address-action" bindtap="onSetDefault">设为默认</view>
+      <van-icon name="edit" size="22" color="#999" bindtap="onEdit" />
+      <van-icon name="delete" size="22" color="#999" bindtap="onDelete" />
+    </view>
+
+    <!-- 选择模式：编辑图标 -->
+    <view wx:elif="{{!manage}}" class="address-right">
+      <van-icon name="edit" size="22" color="#999" catchtap="onEdit" />
+    </view>
   </view>
 
-  <view wx:if="{{manage}}" class="address-actions" catchtap="onNoop">
-    <view wx:if="{{!address.isDefault}}" class="address-action" bindtap="onSetDefault">设为默认</view>
-    <van-icon name="edit" size="22" color="#999" bindtap="onEdit" />
-    <van-icon name="delete" size="22" color="#999" bindtap="onDelete" />
-  </view>
-
-  <view wx:elif="{{selected}}" class="address-check">
-    <view class="address-check-dot"></view>
+  <!-- 下方：设为默认地址按钮 -->
+  <view wx:if="{{!manage}}" class="address-set-default" catchtap="onSetDefault">
+    <view wx:if="{{address.isDefault}}" class="address-check">
+      <view class="address-check-dot"></view>
+    </view>
+    <view class="address-set-default-btn">{{address.isDefault ? '默认地址' : '设为默认'}}</view>
+    <view class="address-set-default-text">{{address.isDefault ? '当前默认收货地址' : '点击设为默认收货地址'}}</view>
   </view>
 </view>

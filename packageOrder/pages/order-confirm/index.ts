@@ -40,6 +40,7 @@ Page({
     tablewareText: '无需餐具',
     tablewareStatus: TablewareStatus.SPECIFIED,
     tablewareNumber: 0,
+    tablewareValue: { status: TablewareStatus.SPECIFIED, number: 0 } as { status: number; number: number },
     // 备注
     remark: DEFAULT_REMARK,
     // 弹窗
@@ -61,6 +62,9 @@ Page({
     if (selected && selected.id) {
       this.setData({ address: selected })
       clearSelectedAddress()
+    } else if (selected === null && this.data.address) {
+      // 之前选中的地址被删除了，清空并重新加载默认地址
+      this.setData({ address: null })
     }
     const remark = wx.getStorageSync(STORAGE_ORDER_REMARK)
     if (remark !== '') {
@@ -137,7 +141,12 @@ Page({
     let text = '无需餐具'
     if (status === TablewareStatus.BY_QUANTITY) text = '依据餐量供应'
     else if (number > 0) text = `${number}份`
-    this.setData({ tablewareStatus: status, tablewareNumber: number, tablewareText: text })
+    this.setData({
+      tablewareStatus: status,
+      tablewareNumber: number,
+      tablewareText: text,
+      tablewareValue: { status, number },
+    })
   },
 
   // ---- 备注 ----

@@ -155,13 +155,7 @@ Page({
     if (this.data.shopStatus !== 1) return
     const ok = await ensureLogin()
     if (!ok) return
-    shopCartStore.dispatch('addAction', {
-      setmealId: setmeal.id,
-      name: setmeal.name,
-      image: setmeal.image,
-      amount: setmeal.price,
-      number: 1,
-    })
+    shopCartStore.dispatch('addAction', { setmealId: setmeal.id })
     this.setData({ setmealVisible: false })
     wx.showToast({ title: '已加入购物车', icon: 'success' })
   },
@@ -189,11 +183,7 @@ Page({
     if (!ok) return
     shopCartStore.dispatch('addAction', {
       dishId: dish.id,
-      name: dish.name,
-      image: dish.image,
-      amount: dish.price,
       dishFlavor: flavorText,
-      number: 1,
     })
     wx.showToast({ title: '已加入购物车', icon: 'success' })
   },
@@ -204,13 +194,7 @@ Page({
     const { dish } = e.detail
     const ok = await ensureLogin()
     if (!ok) return
-    shopCartStore.dispatch('addAction', {
-      dishId: dish.id,
-      name: dish.name,
-      image: dish.image,
-      amount: dish.price,
-      number: 1,
-    })
+    shopCartStore.dispatch('addAction', { dishId: dish.id })
     wx.showToast({ title: '已加入购物车', icon: 'success' })
   },
 
@@ -223,13 +207,9 @@ Page({
     const ok = await ensureLogin()
     if (!ok) return
     if (value > cur) {
-      shopCartStore.dispatch('addAction', {
-        dishId: dish.id,
-        name: dish.name,
-        image: dish.image,
-        amount: dish.price,
-        number: value - cur,
-      })
+      for (let i = 0; i < value - cur; i++) {
+        shopCartStore.dispatch('addAction', { dishId: dish.id })
+      }
     } else {
       for (let i = 0; i < cur - value; i++) {
         shopCartStore.dispatch('subAction', { dishId: dish.id })
@@ -256,15 +236,13 @@ Page({
     const cur = item.number
     if (value === cur) return
     if (value > cur) {
-      shopCartStore.dispatch('addAction', {
-        dishId: item.dishId,
-        setmealId: item.setmealId,
-        name: item.name,
-        image: item.image,
-        amount: item.amount,
-        dishFlavor: item.dishFlavor,
-        number: value - cur,
-      })
+      for (let i = 0; i < value - cur; i++) {
+        shopCartStore.dispatch('addAction', {
+          dishId: item.dishId,
+          setmealId: item.setmealId,
+          dishFlavor: item.dishFlavor,
+        })
+      }
     } else {
       for (let i = 0; i < cur - value; i++) {
         shopCartStore.dispatch('subAction', {
@@ -291,6 +269,10 @@ Page({
     if (!ok) return
     shopCartStore.dispatch('toggleSelectAllAction', true)
     wx.navigateTo({ url: '/packageOrder/pages/order-confirm/index' })
+  },
+
+  onGoPersonal() {
+    wx.navigateTo({ url: '/pages/personal/index' })
   },
 
   onCallPhone() {

@@ -9,5 +9,5 @@
       <view class="cart-total-price">¥{{totalPrice}}</view>
     </view>
   </view>
-  <view class="cart-right {{totalCount > 0 ? 'cart-right-active' : ''}}">去结算</view>
+  <view class="cart-right {{totalCount > 0 ? 'cart-right-active' : ''}}" catch:tap="onSettle">去结算</view>
 </view>

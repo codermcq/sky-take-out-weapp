@@ -161,5 +161,5 @@
 
 .confirm-submit {
   width: 240rpx;
-  border-radius: 44rpx;
+  border-radius: 12rpx !important;
 }

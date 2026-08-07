@@ -42,3 +42,7 @@
   padding-bottom: calc(20rpx + env(safe-area-inset-bottom));
   background: #fff;
 }
+
+.remark-done-btn {
+  border-radius: 12rpx !important;
+}

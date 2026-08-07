@@ -19,7 +19,7 @@
           min="0"
           integer
           disable-input
-          button-size="24"
+          button-size="20"
           theme="round"
           data-id="{{item.id}}"
           bind:change="onStepperChange"

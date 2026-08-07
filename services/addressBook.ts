@@ -49,7 +49,6 @@ export function deleteAddress(id: number) {
 /** 设置默认地址 */
 export function setDefaultAddress(id: number) {
   return mqRequest.put({
-    url: '/user/addressBook/default',
-    data: { id },
+    url: `/user/addressBook/default?id=${id}`,
   })
 }

@@ -9,12 +9,16 @@ Component({
   },
   data: {
     fullAddress: '',
+    surname: '',
+    genderLabel: '',
   },
   observers: {
     address(addr: any) {
       if (!addr) return
       const full = `${addr.provinceName || ''}${addr.cityName || ''}${addr.districtName || ''}${addr.detail || ''}`
-      this.setData({ fullAddress: full })
+      const surname = (addr.consignee || '').charAt(0)
+      const gender = addr.sex === 0 ? '女士' : '先生'
+      this.setData({ fullAddress: full, surname, genderLabel: gender })
     },
   },
   methods: {

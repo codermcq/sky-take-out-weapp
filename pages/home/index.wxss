@@ -1,6 +1,9 @@
 .home-page {
-  min-height: 100vh;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
   background: #f5f5f5;
+  overflow: hidden;
 }
 
 /* 头部 */
@@ -44,11 +47,36 @@
   padding: 8rpx;
 }
 
+/* 个人中心入口 */
+.home-personal {
+  display: inline-flex;
+  align-items: center;
+  margin: 8rpx 32rpx 0;
+  padding: 8rpx 16rpx;
+  background: rgba(255, 255, 255, 0.15);
+  border-radius: 32rpx;
+}
+
+.home-personal-icon {
+  font-size: 28rpx;
+}
+
+.home-personal-text {
+  margin-left: 8rpx;
+  font-size: 24rpx;
+  color: #fff;
+}
+
+.home-personal-arrow {
+  display: none;
+}
+
 /* 内容区 */
 .home-content {
   display: flex;
-  height: calc(100vh - 240rpx - env(safe-area-inset-bottom));
+  flex: 1;
   margin-top: 20rpx;
+  overflow: hidden;
 }
 
 .home-cats {
@@ -99,7 +127,7 @@
 .home-goods {
   flex: 1;
   height: 100%;
-  padding: 20rpx;
+  padding: 20rpx 20rpx 120rpx;
   box-sizing: border-box;
   overflow-x: hidden;
 }

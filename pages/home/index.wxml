@@ -7,6 +7,11 @@
         <view class="home-shop-status {{shopStatus === 1 ? '' : 'is-closed'}}">{{shopStatus === 1 ? '营业中' : '休息中'}}</view>
         <view class="home-phone" bindtap="onCallPhone">📞</view>
       </view>
+      <view class="home-personal" bindtap="onGoPersonal">
+        <view class="home-personal-icon">👤</view>
+        <view class="home-personal-text">个人中心</view>
+        <view class="home-personal-arrow">›</view>
+      </view>
     </view>
   </view>
 
@@ -61,6 +66,7 @@
     visible="{{allCount > 0}}"
     disabled="{{shopStatus !== 1}}"
     bind:tap="onToggleCart"
+    bind:settle="onCartSettle"
   />
 
   <!-- 购物车弹窗 -->

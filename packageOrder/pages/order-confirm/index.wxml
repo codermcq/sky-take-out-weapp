@@ -13,13 +13,6 @@
     </view>
   </view>
 
-  <!-- 配送时间 / 餐具 / 备注 -->
-  <view class="confirm-section">
-    <van-cell title="配送时间" value="{{deliveryTimeText}}" is-link arrow-direction="right" bind:click="onOpenTime" />
-    <van-cell title="餐具数量" value="{{tablewareText}}" is-link arrow-direction="right" bind:click="onOpenTableware" />
-    <van-cell title="订单备注" value="{{remark}}" label="点击填写备注" is-link arrow-direction="right" bind:click="onGoRemark" value-class="confirm-remark-value" />
-  </view>
-
   <!-- 商品清单 -->
   <view class="confirm-section">
     <view class="confirm-goods-title">商品清单</view>
@@ -63,20 +56,27 @@
     <view class="confirm-invoice">如需发票请移步首页拨打商家电话咨询</view>
   </view>
 
+  <!-- 配送时间 / 餐具 / 备注 -->
+  <view class="confirm-section">
+    <van-cell title="配送时间" value="{{deliveryTimeText}}" is-link arrow-direction="right" bind:click="onOpenTime" />
+    <van-cell title="餐具数量" value="{{tablewareText}}" is-link arrow-direction="right" bind:click="onOpenTableware" />
+    <van-cell title="订单备注" value="{{remark}}" is-link arrow-direction="right" bind:click="onGoRemark" value-class="confirm-remark-value" />
+  </view>
+
   <!-- 提交栏 -->
   <view class="confirm-footer">
     <view class="confirm-footer-amount">
       <text class="confirm-footer-label">应付：</text>
       <text class="confirm-footer-price">¥{{totalAmount}}</text>
     </view>
-    <van-button type="primary" round loading="{{submitting}}" custom-class="confirm-submit" bind:click="onSubmit">提交订单</van-button>
+    <van-button type="primary" loading="{{submitting}}" custom-class="confirm-submit" bind:click="onSubmit">提交订单</van-button>
   </view>
 
   <!-- 弹窗 -->
   <delivery-time-popup show="{{timeVisible}}" bind:close="onCloseTime" bind:confirm="onTimeConfirm" />
   <tableware-popup
     show="{{tablewareVisible}}"
-    value="{{{status: tablewareStatus, number: tablewareNumber}}}"
+    value="{{tablewareValue}}"
     bind:close="onCloseTableware"
     bind:confirm="onTablewareConfirm"
   />

@@ -51,13 +51,13 @@
 
     <!-- 操作区 -->
     <view class="detail-actions">
-      <van-button wx:if="{{order.status === 1}}" type="primary" round block custom-class="detail-action-btn" bind:click="onGoPay">立即支付</van-button>
+      <van-button wx:if="{{order.status === 1}}" type="primary" block custom-class="detail-action-btn" bind:click="onGoPay">立即支付</van-button>
       <view class="detail-action-row">
-        <van-button wx:if="{{order.status === 1 || order.status === 2}}" size="small" round data-type="cancel" bind:click="onAction">取消订单</van-button>
-        <van-button wx:if="{{order.status === 2}}" size="small" round type="primary" data-type="reminder" bind:click="onAction">催单</van-button>
-        <van-button wx:if="{{order.status === 3 || order.status === 4}}" size="small" round data-type="cancel" bind:click="onAction">取消订单</van-button>
-        <van-button wx:if="{{order.status === 5}}" size="small" round type="primary" data-type="refund" bind:click="onAction">申请退款</van-button>
-        <van-button wx:if="{{order.status === 1 || order.status === 5 || order.status === 6}}" size="small" round data-type="repeat" bind:click="onAction">再来一单</van-button>
+        <van-button wx:if="{{order.status === 1 || order.status === 2}}" size="small" custom-style="border-radius:8rpx;" data-type="cancel" bind:click="onAction">取消订单</van-button>
+        <van-button wx:if="{{order.status === 2}}" size="small" type="primary" custom-style="border-radius:8rpx;" data-type="reminder" bind:click="onAction">催单</van-button>
+        <van-button wx:if="{{order.status === 3 || order.status === 4}}" size="small" custom-style="border-radius:8rpx;" data-type="cancel" bind:click="onAction">取消订单</van-button>
+        <van-button wx:if="{{order.status === 5}}" size="small" type="primary" custom-style="border-radius:8rpx;" data-type="refund" bind:click="onAction">申请退款</van-button>
+        <van-button wx:if="{{order.status === 1 || order.status === 5 || order.status === 6}}" size="small" custom-style="border-radius:8rpx;" data-type="repeat" bind:click="onAction">再来一单</van-button>
       </view>
     </view>
   </block>

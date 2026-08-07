@@ -1,0 +1,37 @@
+<view class="personal-page">
+  <!-- 用户信息 -->
+  <view class="personal-header">
+    <button class="personal-avatar-btn" open-type="chooseAvatar" bindchooseavatar="onChooseAvatar">
+      <image
+        wx:if="{{avatar}}"
+        class="personal-avatar"
+        src="{{avatar}}"
+        mode="aspectFill"
+      />
+      <view wx:else class="personal-avatar-ph">👤</view>
+    </button>
+    <input
+      class="personal-nickname"
+      type="nickname"
+      value="{{nickname}}"
+      placeholder="点击设置昵称"
+      bindchange="onNicknameChange"
+    />
+  </view>
+
+  <!-- 菜单 -->
+  <van-cell-group inset custom-class="personal-group">
+    <van-cell
+      title="地址管理"
+      is-link
+      icon="location-o"
+      bind:click="onGoAddress"
+    />
+    <van-cell
+      title="历史订单"
+      is-link
+      icon="orders-o"
+      bind:click="onGoOrders"
+    />
+  </van-cell-group>
+</view>

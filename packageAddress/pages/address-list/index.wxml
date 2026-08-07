@@ -19,6 +19,6 @@
   </view>
 
   <view class="addr-footer">
-    <van-button type="primary" round block custom-class="addr-add-btn" bind:click="onAdd">+ 新增地址</van-button>
+    <van-button type="primary" block custom-class="addr-add-btn" bind:click="onAdd">+ 新增地址</van-button>
   </view>
 </view>

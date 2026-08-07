@@ -3,17 +3,21 @@
 }
 
 .address-card {
-  display: flex;
-  align-items: center;
   background: #fff;
   border-radius: 16rpx;
-  padding: 24rpx;
   margin-bottom: 20rpx;
   border: 2rpx solid transparent;
+  overflow: hidden;
 }
 
 .address-card-selected {
   border-color: #FF6B35;
+}
+
+.address-body {
+  display: flex;
+  align-items: center;
+  padding: 24rpx;
 }
 
 .address-main {
@@ -21,30 +25,42 @@
   min-width: 0;
 }
 
-.address-head {
+/* 第一行：标签 + 地址 */
+.address-row1 {
+  display: flex;
+  align-items: flex-start;
+  margin-bottom: 12rpx;
+}
+
+.address-detail {
+  flex: 1;
+  font-size: 28rpx;
+  color: #333;
+  font-weight: 500;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  line-height: 1.4;
+}
+
+/* 第二行：姓名+性别 + 电话 */
+.address-row2 {
   display: flex;
   align-items: center;
 }
 
 .address-name {
-  font-size: 30rpx;
-  font-weight: 600;
+  font-size: 26rpx;
   color: #333;
+  margin-right: 36rpx;
 }
 
 .address-phone {
   font-size: 26rpx;
   color: #666;
-  margin-left: 16rpx;
 }
 
-.address-detail {
-  font-size: 26rpx;
-  color: #666;
-  margin-top: 10rpx;
-  line-height: 1.5;
-}
-
+/* 管理模式操作区 */
 .address-actions {
   display: flex;
   align-items: center;
@@ -55,9 +71,50 @@
 
 .address-action {
   font-size: 24rpx;
-  color: #FF6B35;
+  color: #FFB800;
 }
 
+/* 选择模式右侧：编辑图标 + 选中勾 */
+.address-right {
+  display: flex;
+  align-items: center;
+  gap: 16rpx;
+  flex-shrink: 0;
+  margin-left: 16rpx;
+}
+
+.address-right .van-icon {
+  padding: 8rpx;
+}
+
+/* 选择模式：下方设为默认按钮 */
+.address-set-default {
+  display: flex;
+  align-items: center;
+  padding: 16rpx 24rpx;
+  border-top: 1rpx solid #f5f5f5;
+}
+
+.address-set-default .address-check {
+  margin-right: 16rpx;
+}
+
+.address-set-default-btn {
+  font-size: 24rpx;
+  color: #FFB800;
+  border: 1rpx solid #FFB800;
+  border-radius: 8rpx;
+  padding: 6rpx 20rpx;
+  flex-shrink: 0;
+}
+
+.address-set-default-text {
+  font-size: 24rpx;
+  color: #999;
+  margin-left: 16rpx;
+}
+
+/* 选中勾 */
 .address-check {
   width: 36rpx;
   height: 36rpx;
@@ -66,7 +123,6 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-left: 16rpx;
   flex-shrink: 0;
 }
 

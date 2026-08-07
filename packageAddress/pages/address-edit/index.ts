@@ -9,6 +9,7 @@ Page({
   data: {
     editId: 0,
     consignee: '',
+    sex: 1,
     phone: '',
     provinceCode: '',
     provinceName: '',
@@ -39,6 +40,7 @@ Page({
       .then((a) => {
         this.setData({
           consignee: a.consignee || '',
+          sex: a.sex != null ? Number(a.sex) : 1,
           phone: a.phone || '',
           provinceCode: a.provinceCode || '',
           provinceName: a.provinceName || '',
@@ -48,7 +50,7 @@ Page({
           districtName: a.districtName || '',
           detail: a.detail || '',
           label: a.label || '公司',
-          isDefault: !!a.isDefault,
+          isDefault: a.isDefault === 1,
           regionValue: [a.provinceCode || '', a.cityCode || '', a.districtCode || ''],
         })
       })
@@ -57,17 +59,21 @@ Page({
   },
 
   onNameInput(e: WechatMiniprogram.Input) {
-    let value = e.detail.value
+    let value = e.detail.value || ''
     if (value.length > 12) value = value.slice(0, 12)
     this.setData({ consignee: value })
   },
 
-  onPhoneInput(e: WechatMiniprogram.Input) {
-    this.setData({ phone: e.detail.value.replace(/\D/g, '').slice(0, 11) })
+  onPhoneInput(e: WechatMiniprogram.CustomEvent) {
+    this.setData({ phone: ((e.detail || '') as string).replace(/\D/g, '').slice(0, 11) })
   },
 
-  onDetailInput(e: WechatMiniprogram.Input) {
-    this.setData({ detail: e.detail.value })
+  onDetailInput(e: WechatMiniprogram.CustomEvent) {
+    this.setData({ detail: (e.detail || '') as string })
+  },
+
+  onSexChange(e: WechatMiniprogram.TouchEvent) {
+    this.setData({ sex: Number(e.currentTarget.dataset.sex) })
   },
 
   onSelectLabel(e: WechatMiniprogram.TouchEvent) {
@@ -123,6 +129,7 @@ Page({
     const d = this.data
     const base = {
       consignee: d.consignee.trim(),
+      sex: d.sex,
       phone: d.phone,
       provinceCode: d.provinceCode,
       provinceName: d.provinceName,
@@ -132,7 +139,7 @@ Page({
       districtName: d.districtName,
       detail: d.detail.trim(),
       label: d.label,
-      isDefault: d.isDefault,
+      isDefault: d.isDefault ? 1 : 0,
     }
     const done = () => wx.navigateBack()
     if (d.editId) {

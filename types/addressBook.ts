@@ -18,8 +18,8 @@ export interface AddressBook {
   detail: string
   /** 标签：公司/家/学校 */
   label?: string
-  /** 是否默认 */
-  isDefault: boolean
+  /** 是否默认：1 默认，0 非默认 */
+  isDefault: number
 }
 
 /** 提交给后端的地址（去掉服务端生成字段） */

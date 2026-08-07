@@ -1,16 +1,10 @@
 /**
- * 购物车 store（纯前端本地维护，不调后端接口）
- * 同菜品不同口味为独立行；countMap 按 dishId/setmealId 求和，驱动首页 stepper。
+ * 购物车 store（调用后端接口维护）
+ * 同菜品不同口味为独立行；countMap 驱动首页 stepper。
  */
 import { HYEventStore } from 'hy-event-store'
 import { ShoppingCartItem } from '../types/shoppingCart'
-
-let _nextId = Date.now()
-
-/** 生成本地唯一 id */
-function uid(): number {
-  return _nextId++
-}
+import { getCartList, addCart, subCart, cleanCart } from '../services/shoppingCart'
 
 /** 重算派生值 */
 function recompute(ctx: any) {
@@ -66,73 +60,63 @@ const shopCartStore = new HYEventStore({
     allCount: 0,
   },
   actions: {
-    /** 初始化：重置为空（不再从后端拉取） */
-    fetchCartAction(ctx: any) {
-      recompute(ctx)
-    },
-
-    /**
-     * 加购。
-     * data: { dishId?/setmealId?, name, image, amount(单价), dishFlavor?, number }
-     */
-    addAction(ctx: any, data: { dishId?: number; setmealId?: number; name: string; image: string; amount: number; dishFlavor?: string; number?: number }) {
-      const num = data.number ?? 1
-      const key = String(data.dishId ?? data.setmealId ?? '')
-      // 同菜品同口味→数量累加
-      const exist = (ctx.cartList || []).find(
-        (i: ShoppingCartItem) =>
-          String(i.dishId ?? i.setmealId ?? '') === key &&
-          (i.dishFlavor || '') === (data.dishFlavor || '')
-      )
-      if (exist) {
-        exist.number += num
-      } else {
-        ctx.cartList = [
-          ...(ctx.cartList || []),
-          {
-            id: uid(),
-            dishId: data.dishId,
-            setmealId: data.setmealId,
-            name: data.name,
-            image: data.image,
-            amount: data.amount,
-            dishFlavor: data.dishFlavor || '',
-            number: num,
-          },
-        ]
+    /** 从后端拉取购物车 */
+    async fetchCartAction(ctx: any) {
+      try {
+        const list = await getCartList()
+        ctx.cartList = list || []
+      } catch {
+        ctx.cartList = []
       }
       recompute(ctx)
     },
 
     /**
-     * 减购：匹配同菜品同口味的行，数量减 1；减到 0 则删除。
-     * data: { dishId?/setmealId?, dishFlavor? }
+     * 加购 → 调用后端接口，然后刷新购物车列表
+     * data: { dishId?, setmealId?, dishFlavor? }
      */
-    subAction(ctx: any, data: { dishId?: number; setmealId?: number; dishFlavor?: string }) {
-      const key = String(data.dishId ?? data.setmealId ?? '')
-      const idx = (ctx.cartList || []).findIndex(
-        (i: ShoppingCartItem) =>
-          String(i.dishId ?? i.setmealId ?? '') === key &&
-          (i.dishFlavor || '') === (data.dishFlavor || '')
-      )
-      if (idx !== -1) {
-        const item = ctx.cartList[idx]
-        item.number -= 1
-        if (item.number <= 0) {
-          ctx.cartList = ctx.cartList.filter((_: any, i: number) => i !== idx)
-        }
+    async addAction(ctx: any, data: { dishId?: number; setmealId?: number; dishFlavor?: string }) {
+      try {
+        await addCart({
+          dishId: data.dishId,
+          setmealId: data.setmealId,
+          dishFlavor: data.dishFlavor,
+          number: 1,
+        })
+        const list = await getCartList()
+        ctx.cartList = list || []
+      } catch {
+        // 失败不更新
       }
       recompute(ctx)
     },
 
-    /** 删除单条 */
-    removeItemAction(ctx: any, id: number) {
-      ctx.cartList = (ctx.cartList || []).filter((i: ShoppingCartItem) => i.id !== id)
+    /**
+     * 减购 → 调用后端接口，然后刷新购物车列表
+     * data: { dishId?, setmealId?, dishFlavor? }
+     */
+    async subAction(ctx: any, data: { dishId?: number; setmealId?: number; dishFlavor?: string }) {
+      try {
+        await subCart({
+          dishId: data.dishId,
+          setmealId: data.setmealId,
+          dishFlavor: data.dishFlavor,
+        })
+        const list = await getCartList()
+        ctx.cartList = list || []
+      } catch {
+        // 失败不更新
+      }
       recompute(ctx)
     },
 
-    /** 清空 */
-    cleanAction(ctx: any) {
+    /** 清空购物车 */
+    async cleanAction(ctx: any) {
+      try {
+        await cleanCart()
+      } catch {
+        // 失败也清空本地
+      }
       ctx.cartList = []
       recompute(ctx)
     },

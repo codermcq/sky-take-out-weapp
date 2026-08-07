@@ -15,6 +15,6 @@
   <view class="remark-count">{{remark.length}}/{{maxLen}}</view>
 
   <view class="remark-footer">
-    <van-button type="primary" round block bind:click="onDone">完成</van-button>
+    <van-button type="primary" block custom-class="remark-done-btn" bind:click="onDone">完成</van-button>
   </view>
 </view>

@@ -1,9 +1,9 @@
 /* 全局样式与 Vant 主题变量 */
 page {
-  --primary-color: #FF6B35;
-  --van-primary-color: #FF6B35;
-  --van-button-primary-background: #FF6B35;
-  --van-button-primary-border-color: #FF6B35;
+  --primary-color: #FFB800;
+  --van-primary-color: #FFB800;
+  --van-button-primary-background: #FFB800;
+  --van-button-primary-border-color: #FFB800;
   --van-tab-active-text-color: #FF6B35;
   --van-tabs-bottom-bar-color: #FF6B35;
   --van-search-content-background: #fff;

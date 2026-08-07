@@ -21,7 +21,7 @@ export const DELIVERY_DELAY_HOURS = 1
 export const PAY_TIMEOUT_MINUTES = 15
 
 /** 订单默认备注（原型默认文案） */
-export const DEFAULT_REMARK = '无接触配送，将商品挂家门口或前台，地址封闭管理时请电话联系。'
+export const DEFAULT_REMARK = '推荐无接触配送'
 
 /** 下单页选地址临时通道 */
 export const STORAGE_SELECTED_ADDRESS = 'selectedAddress'

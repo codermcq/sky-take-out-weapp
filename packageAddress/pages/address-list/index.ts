@@ -1,7 +1,7 @@
 /** 地址管理：列表 + 增删改 + 设默认；mode=select 供下单页选地址 */
 import { getAddressList, deleteAddress, setDefaultAddress } from '../../../services/addressBook'
 import { AddressBook } from '../../../types/addressBook'
-import { saveSelectedAddress } from '../../../utils/address-selection'
+import { saveSelectedAddress, isSelectedAddressDeleted, clearSelectedAddress } from '../../../utils/address-selection'
 
 Page({
   data: {
@@ -43,7 +43,13 @@ Page({
       success: (r) => {
         if (r.confirm) {
           deleteAddress(address.id)
-            .then(() => this.loadList())
+            .then(() => {
+              // 如果删除了已选中的地址，清除 storage 中的选择
+              if (isSelectedAddressDeleted(address.id)) {
+                clearSelectedAddress()
+              }
+              this.loadList()
+            })
             .catch(() => {})
         }
       },

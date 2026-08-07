@@ -23,8 +23,8 @@
 .empty-btn {
   margin-top: 32rpx;
   padding: 16rpx 56rpx;
-  background: #FF6B35;
+  background: #FFB800;
   color: #fff;
-  border-radius: 40rpx;
+  border-radius: 12rpx;
   font-size: 28rpx;
 }

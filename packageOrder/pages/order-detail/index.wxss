@@ -144,6 +144,7 @@
 
 .detail-action-btn {
   margin-bottom: 24rpx;
+  border-radius: 12rpx !important;
 }
 
 .detail-action-row {

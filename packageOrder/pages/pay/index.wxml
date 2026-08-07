@@ -25,7 +25,7 @@
   </view>
 
   <view class="pay-actions">
-    <van-button type="primary" round block disabled="{{expired}}" loading="{{paying}}" bind:click="onPay">立即支付</van-button>
+    <van-button type="primary" block disabled="{{expired}}" loading="{{paying}}" custom-class="pay-submit-btn" bind:click="onPay">立即支付</van-button>
     <view class="pay-cancel" bindtap="onCancel">取消订单</view>
     <view class="pay-home" bindtap="onGoHome">回到首页</view>
   </view>

@@ -1,5 +1,5 @@
 /** 用户相关接口 */
-import { mqRequest } from './index'
+import { mqRequest, mqUpload } from './index'
 import { LoginResult } from '../types/user'
 
 /** 微信登录：wx.login 拿 code 换 token（后端返回 {id, openid, token}） */
@@ -14,5 +14,18 @@ export function login(code: string) {
 export function logout() {
   return mqRequest.post({
     url: '/user/user/logout',
+  })
+}
+
+/** 上传文件（头像），返回永久 URL */
+export function uploadFile(filePath: string) {
+  return mqUpload(filePath, '/user/common/upload')
+}
+
+/** 更新用户信息（头像/昵称） */
+export function updateProfile(data: { avatar?: string; name?: string }) {
+  return mqRequest.put({
+    url: '/user/user/profile',
+    data,
   })
 }

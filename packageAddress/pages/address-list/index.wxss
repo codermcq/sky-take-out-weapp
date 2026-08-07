@@ -19,5 +19,5 @@
 }
 
 .addr-add-btn {
-  border-radius: 44rpx;
+  border-radius: 12rpx !important;
 }

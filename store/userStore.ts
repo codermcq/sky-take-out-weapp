@@ -4,6 +4,8 @@ import { login as loginApi, logout as logoutApi } from '../services/user'
 import { TOKEN_KEY } from '../services/config'
 import { UserInfo } from '../types/user'
 
+const USER_INFO_KEY = 'userInfo'
+
 const userStore = new HYEventStore({
   state: {
     token: '',
@@ -17,6 +19,8 @@ const userStore = new HYEventStore({
       if (token) {
         ctx.token = token
         ctx.isLoggedIn = true
+        const info = wx.getStorageSync(USER_INFO_KEY)
+        if (info) ctx.userInfo = info
       }
     },
     /** 微信登录：wx.login 拿 code 换 token（后端返回 {id, openid, token}） */
@@ -29,9 +33,10 @@ const userStore = new HYEventStore({
         return res
       })
     },
-    /** 更新用户资料（头像/昵称） */
+    /** 更新用户资料（头像/昵称），同步持久化到 storage */
     setUserInfoAction(ctx: any, info: Partial<UserInfo>) {
       ctx.userInfo = { ...ctx.userInfo, ...info }
+      wx.setStorageSync(USER_INFO_KEY, ctx.userInfo)
     },
     /** 退出登录 */
     logoutAction(ctx: any) {
@@ -42,6 +47,7 @@ const userStore = new HYEventStore({
       ctx.userInfo = {}
       ctx.isLoggedIn = false
       wx.removeStorageSync(TOKEN_KEY)
+      wx.removeStorageSync(USER_INFO_KEY)
     },
   },
 })

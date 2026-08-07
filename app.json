@@ -2,6 +2,7 @@
   "pages": [
     "pages/home/index",
     "pages/login/index",
+    "pages/personal/index",
     "pages/setmeal-detail/index"
   ],
   "subPackages": [

@@ -4,7 +4,7 @@
  */
 import { STORAGE_SELECTED_ADDRESS } from './constant'
 
-export function saveSelectedAddress(addr: object) {
+export function saveSelectedAddress(addr: any) {
   wx.setStorageSync(STORAGE_SELECTED_ADDRESS, addr)
 }
 
@@ -14,4 +14,10 @@ export function getSelectedAddress(): any {
 
 export function clearSelectedAddress() {
   wx.removeStorageSync(STORAGE_SELECTED_ADDRESS)
+}
+
+/** 检查已选地址是否被删除（传入被删地址的 id） */
+export function isSelectedAddressDeleted(deletedId: number): boolean {
+  const addr = getSelectedAddress()
+  return addr && addr.id === deletedId
 }

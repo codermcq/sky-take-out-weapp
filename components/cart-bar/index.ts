@@ -13,5 +13,9 @@ Component({
       if (!this.data.visible || this.data.disabled) return
       this.triggerEvent('tap')
     },
+    onSettle() {
+      if (!this.data.visible || this.data.disabled) return
+      this.triggerEvent('settle')
+    },
   },
 })
