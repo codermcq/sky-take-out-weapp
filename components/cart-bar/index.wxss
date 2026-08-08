@@ -47,7 +47,7 @@
   height: 28rpx;
   line-height: 28rpx;
   text-align: center;
-  background: #FFB800;
+  background: rgb(255, 193, 7);
   color: #fff;
   font-size: 18rpx;
   border-radius: 14rpx;
@@ -87,5 +87,5 @@
 }
 
 .cart-right-active {
-  background: #FFB800;
+  background: rgb(255, 193, 7);
 }

@@ -64,7 +64,7 @@ export interface Order {
   addressBookId: number
   orderTime: string
   checkoutTime?: string
-  /** 支付方式：1 微信 */
+  /** 支付方式：1 微信，2 支付宝 */
   payMethod?: number
   payStatus?: PayStatus
   /** 订单金额（元） */
@@ -75,6 +75,14 @@ export interface Order {
   consignee?: string
   /** 预计送达时间 */
   estimatedDeliveryTime?: string
+  /** 实际送达时间 */
+  deliveryTime?: string
+  /** 打包费（元） */
+  packAmount?: number
+  /** 订单取消原因 */
+  cancelReason?: string
+  /** 订单拒单原因 */
+  rejectionReason?: string
   orderDetailList: OrderDetail[]
 }
 

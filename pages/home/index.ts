@@ -142,6 +142,7 @@ Page({
   },
 
   onSetmealTap(e: WechatMiniprogram.CustomEvent) {
+    if (this.data.shopStatus !== 1) return
     const { setmeal } = e.detail
     this.setData({ currentSetmeal: setmeal, setmealVisible: true })
   },
@@ -169,6 +170,7 @@ Page({
   },
 
   onSelectFlavor(e: WechatMiniprogram.CustomEvent) {
+    if (this.data.shopStatus !== 1) return
     this.setData({ flavorDish: e.detail.dish, flavorVisible: true, detailVisible: false })
   },
 
@@ -286,5 +288,9 @@ Page({
   onPhoneConfirm() {
     wx.makePhoneCall({ phoneNumber: SHOP_PHONE })
     this.setData({ phoneVisible: false })
+  },
+
+  noop() {
+    /* 打烊遮罩拦截点击 */
   },
 })

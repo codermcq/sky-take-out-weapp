@@ -28,12 +28,12 @@ Component({
     order(order: any) {
       if (!order || !order.id) return
       const status = order.status
-      let actions: { key: string; label: string; type?: string }[] = []
+      let actions: { key: string; label: string; type?: string; customStyle?: string }[] = []
       switch (status) {
         case 1:
           actions = [
             { key: 'cancel', label: '取消订单' },
-            { key: 'pay', label: '立即支付', type: 'primary' },
+            { key: 'pay', label: '立即支付', type: 'primary', customStyle: 'background:rgb(255,193,7);border-color:rgb(255,193,7);color:#333' },
             { key: 'repeat', label: '再来一单' },
           ]
           break

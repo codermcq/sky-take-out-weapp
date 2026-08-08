@@ -91,8 +91,8 @@
 
 .cart-popup-settle {
   padding: 14rpx 48rpx;
-  background: #FF6B35;
-  color: #fff;
+  background: rgb(255, 193, 7);
+  color: #333;
   font-size: 26rpx;
   border-radius: 36rpx;
 }

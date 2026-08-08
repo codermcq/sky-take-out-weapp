@@ -88,6 +88,9 @@
 
 .pay-submit-btn {
   border-radius: 12rpx !important;
+  background: rgb(255, 193, 7) !important;
+  border-color: rgb(255, 193, 7) !important;
+  color: #333 !important;
 }
 
 .pay-cancel {

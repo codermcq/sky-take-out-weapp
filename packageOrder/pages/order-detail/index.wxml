@@ -1,36 +1,104 @@
 <view class="detail-page">
   <nav-bar title="订单详情" />
 
-  <van-loading wx:if="{{loading}}" custom-style="margin: 120rpx auto;" />
+  <van-loading wx:if="{{loading}}" custom-style="margin: 200rpx auto;" />
 
   <block wx:elif="{{order}}">
-    <!-- 状态头 -->
-    <view class="detail-status">
-      <view class="detail-status-text">{{statusText}}</view>
-      <view class="detail-status-sub">
-        <text wx:if="{{order.status === 1}}">等待付款</text>
-        <text wx:elif="{{order.status === 6 && order.payStatus === 2}}">退款成功</text>
-        <text wx:else>{{order.estimatedDeliveryTime ? '预计送达 ' + order.estimatedDeliveryTime : '感谢您的信任'}}</text>
+    <!-- 状态 + 操作区（顶部，白底居中） -->
+    <view class="detail-top">
+      <view class="detail-top-title">{{statusTitle}}</view>
+      <!-- 待付款倒计时 -->
+      <view wx:if="{{order.status === 1}}" class="detail-top-sub">
+        <text wx:if="{{countdownExpired}}">订单已超时，请重新下单</text>
+        <text wx:else>剩余支付时间 {{countdownText}}</text>
+      </view>
+      <view wx:elif="{{statusSub}}" class="detail-top-sub">{{statusSub}}</view>
+
+      <!-- 操作按钮：单行居中，内容撑宽 -->
+      <view class="detail-top-btns">
+        <!-- 待付款 -->
+        <block wx:if="{{order.status === 1}}">
+          <van-button custom-class="detail-pay-btn" data-type="pay" bind:click="onGoPay">立即支付</van-button>
+          <van-button data-type="cancel" bind:click="onAction">取消订单</van-button>
+          <van-button data-type="repeat" bind:click="onAction">再来一单</van-button>
+        </block>
+        <!-- 待接单 -->
+        <block wx:if="{{order.status === 2}}">
+          <van-button data-type="cancel" bind:click="onAction">取消订单</van-button>
+          <van-button data-type="reminder" bind:click="onAction">催单</van-button>
+          <van-button data-type="repeat" bind:click="onAction">再来一单</van-button>
+        </block>
+        <!-- 已接单 / 派送中 -->
+        <block wx:if="{{order.status === 3 || order.status === 4}}">
+          <van-button data-type="cancel" bind:click="onAction">取消订单</van-button>
+          <van-button data-type="reminder" bind:click="onAction">催单</van-button>
+          <van-button data-type="repeat" bind:click="onAction">再来一单</van-button>
+        </block>
+        <!-- 已完成 -->
+        <block wx:if="{{order.status === 5}}">
+          <van-button data-type="refund" bind:click="onAction">申请退款</van-button>
+          <van-button data-type="repeat" bind:click="onAction">再来一单</van-button>
+        </block>
+        <!-- 已取消 -->
+        <block wx:if="{{order.status === 6}}">
+          <van-button data-type="repeat" bind:click="onAction">再来一单</van-button>
+        </block>
+      </view>
+    </view>
+
+    <!-- 退款提示条 -->
+    <view wx:if="{{order.status === 6 && order.payStatus === 2}}" class="detail-refund-bar">
+      退款成功，预计1-3个工作日到账
+    </view>
+
+    <!-- 订单信息 -->
+    <view class="detail-section">
+      <view class="detail-section-title">订单信息</view>
+      <view class="detail-info-row">
+        <text class="detail-info-label">订单编号</text>
+        <text class="detail-info-value">{{order.number}}</text>
+      </view>
+      <view class="detail-info-row">
+        <text class="detail-info-label">下单时间</text>
+        <text class="detail-info-value">{{order.orderTime}}</text>
+      </view>
+      <view class="detail-info-row" wx:if="{{payMethodText}}">
+        <text class="detail-info-label">支付方式</text>
+        <text class="detail-info-value">{{payMethodText}}</text>
+      </view>
+      <view class="detail-info-row" wx:if="{{payTime}}">
+        <text class="detail-info-label">支付时间</text>
+        <text class="detail-info-value">{{payTime}}</text>
+      </view>
+      <view class="detail-info-row" wx:if="{{order.estimatedDeliveryTime}}">
+        <text class="detail-info-label">预计送达</text>
+        <text class="detail-info-value">{{order.estimatedDeliveryTime}}</text>
+      </view>
+      <view class="detail-info-row" wx:if="{{order.deliveryTime}}">
+        <text class="detail-info-label">送达时间</text>
+        <text class="detail-info-value">{{order.deliveryTime}}</text>
+      </view>
+      <view class="detail-info-row" wx:if="{{order.remark}}">
+        <text class="detail-info-label">备注</text>
+        <text class="detail-info-value detail-remark-text">{{order.remark}}</text>
       </view>
     </view>
 
     <!-- 收货信息 -->
     <view class="detail-section">
+      <view class="detail-section-title">收货信息</view>
       <view class="detail-addr-row">
-        <view class="detail-addr-icon">📍</view>
+        <text class="detail-addr-icon">📍</text>
         <view class="detail-addr-info">
-          <view class="detail-addr-line1">{{order.consignee}} {{order.phone}}</view>
+          <view class="detail-addr-line1">{{order.consignee}}  {{order.phone}}</view>
           <view class="detail-addr-line2">{{order.address}}</view>
         </view>
       </view>
-      <van-cell title="订单编号" value="{{order.number}}" />
-      <van-cell title="下单时间" value="{{order.orderTime}}" />
-      <van-cell wx:if="{{order.remark}}" title="备注" value="{{order.remark}}" value-class="detail-remark" />
     </view>
 
     <!-- 商品清单 -->
     <view class="detail-section">
-      <view class="detail-goods-title">商品清单</view>
+      <view class="detail-section-title">商品清单</view>
       <view wx:for="{{order.orderDetailList}}" wx:key="id" class="detail-goods-row">
         <image wx:if="{{item.image}}" class="detail-goods-img" src="{{item.image}}" mode="aspectFill" />
         <view wx:else class="detail-goods-img detail-goods-img-ph">🍽</view>
@@ -38,27 +106,35 @@
           <view class="detail-goods-name">{{item.name}}</view>
           <view wx:if="{{item.dishFlavor}}" class="detail-goods-flavor">{{item.dishFlavor}}</view>
         </view>
-        <view class="detail-goods-count">x{{item.number}}</view>
+        <view class="detail-goods-count">×{{item.number}}</view>
         <view class="detail-goods-price">¥{{item.amount}}</view>
       </view>
     </view>
 
-    <!-- 金额 -->
+    <!-- 金额明细 -->
     <view class="detail-section">
-      <view class="detail-fee-row"><text>商品金额</text><text>¥{{goodsPrice}}</text></view>
-      <view class="detail-fee-row detail-fee-total"><text>实付</text><text>¥{{order.amount}}</text></view>
+      <view class="detail-section-title">金额明细</view>
+      <view class="detail-fee-row">
+        <text class="detail-fee-label">商品金额</text>
+        <text class="detail-fee-value">¥{{goodsAmount}}</text>
+      </view>
+      <view class="detail-fee-row">
+        <text class="detail-fee-label">打包费</text>
+        <text class="detail-fee-value">¥{{packFee}}</text>
+      </view>
+      <view class="detail-fee-row">
+        <text class="detail-fee-label">配送费</text>
+        <text class="detail-fee-value">¥{{deliveryFee}}</text>
+      </view>
+      <view class="detail-fee-row detail-fee-total">
+        <text class="detail-fee-label detail-fee-label--bold">实付</text>
+        <text class="detail-fee-value detail-fee-value--bold">¥{{order.amount}}</text>
+      </view>
     </view>
 
-    <!-- 操作区 -->
-    <view class="detail-actions">
-      <van-button wx:if="{{order.status === 1}}" type="primary" block custom-class="detail-action-btn" bind:click="onGoPay">立即支付</van-button>
-      <view class="detail-action-row">
-        <van-button wx:if="{{order.status === 1 || order.status === 2}}" size="small" custom-style="border-radius:8rpx;" data-type="cancel" bind:click="onAction">取消订单</van-button>
-        <van-button wx:if="{{order.status === 2}}" size="small" type="primary" custom-style="border-radius:8rpx;" data-type="reminder" bind:click="onAction">催单</van-button>
-        <van-button wx:if="{{order.status === 3 || order.status === 4}}" size="small" custom-style="border-radius:8rpx;" data-type="cancel" bind:click="onAction">取消订单</van-button>
-        <van-button wx:if="{{order.status === 5}}" size="small" type="primary" custom-style="border-radius:8rpx;" data-type="refund" bind:click="onAction">申请退款</van-button>
-        <van-button wx:if="{{order.status === 1 || order.status === 5 || order.status === 6}}" size="small" custom-style="border-radius:8rpx;" data-type="repeat" bind:click="onAction">再来一单</van-button>
-      </view>
+    <!-- 取消/拒单原因 -->
+    <view wx:if="{{cancelInfo}}" class="detail-section detail-cancel-box">
+      <text>{{cancelInfo}}</text>
     </view>
   </block>
 

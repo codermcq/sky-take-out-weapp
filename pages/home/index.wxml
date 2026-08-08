@@ -116,12 +116,8 @@
     </view>
   </van-popup>
 
-  <!-- 休息中遮罩 -->
-  <view wx:if="{{shopLoaded && shopStatus !== 1}}" class="closed-mask">
-    <view class="closed-box">
-      <view class="closed-icon">🌙</view>
-      <view class="closed-text">本店已打烊</view>
-      <view class="closed-sub">休息中，暂不可点餐</view>
-    </view>
+  <!-- 打烊：透明层盖住购物车栏，拦截所有点击 -->
+  <view wx:if="{{shopLoaded && shopStatus !== 1}}" class="closed-cart-overlay" catchtap="noop">
+    <view class="closed-cart-tip">本店已打烊，暂不可点餐</view>
   </view>
 </view>

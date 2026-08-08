@@ -69,7 +69,7 @@
       <text class="confirm-footer-label">应付：</text>
       <text class="confirm-footer-price">¥{{totalAmount}}</text>
     </view>
-    <van-button type="primary" loading="{{submitting}}" custom-class="confirm-submit" bind:click="onSubmit">提交订单</van-button>
+    <van-button loading="{{submitting}}" custom-class="confirm-submit" bind:click="onSubmit">提交订单</van-button>
   </view>
 
   <!-- 弹窗 -->

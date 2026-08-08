@@ -24,8 +24,8 @@
         wx:key="key"
         size="small"
         plain="{{!item.type}}"
-        type="{{item.type === 'primary' ? 'primary' : 'default'}}"
-        custom-style="{{item.type === 'primary' ? '' : 'color:#666;border-color:#ddd;'}}"
+        type="{{item.type === 'primary' && !item.customStyle ? 'primary' : 'default'}}"
+        custom-style="{{item.customStyle || (item.type === 'primary' ? '' : 'color:#666;border-color:#ddd;')}}"
         data-key="{{item.key}}"
         bind:click="onAction"
       >{{item.label}}</van-button>

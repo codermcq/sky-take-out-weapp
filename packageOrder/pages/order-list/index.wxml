@@ -1,7 +1,7 @@
 <view class="order-list-page">
   <nav-bar title="历史订单" />
 
-  <van-tabs active="{{activeTab}}" color="#FF6B35" line-width="40rpx" bind:change="onTabChange">
+  <van-tabs active="{{activeTab}}" color="rgb(255, 193, 7)" line-width="40rpx" bind:change="onTabChange">
     <van-tab wx:for="{{tabs}}" wx:key="*this" title="{{item}}">
       <view class="order-list-body">
         <van-loading wx:if="{{loading}}" custom-style="margin: 80rpx auto;" />

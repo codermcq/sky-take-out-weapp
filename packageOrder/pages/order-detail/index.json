@@ -2,10 +2,8 @@
   "usingComponents": {
     "nav-bar": "/components/nav-bar/index",
     "empty-view": "/components/empty-view/index",
-    "van-tag": "@vant/weapp/tag/index",
     "van-button": "@vant/weapp/button/index",
-    "van-loading": "@vant/weapp/loading/index",
-    "van-cell": "@vant/weapp/cell/index"
+    "van-loading": "@vant/weapp/loading/index"
   },
   "navigationStyle": "custom"
 }

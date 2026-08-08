@@ -11,11 +11,11 @@ export function submitOrder(data: OrderSubmitDTO) {
   })
 }
 
-/** 模拟支付：后端将订单置为已支付 */
+/** 模拟支付：调用后端支付接口 */
 export function payment(orderNumber: string) {
-  return mqRequest.get({
+  return mqRequest.put<void>({
     url: '/user/order/payment',
-    data: { orderNumber },
+    data: { orderNumber, payMethod: 1 },
   })
 }
 

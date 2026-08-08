@@ -176,37 +176,24 @@
   font-size: 28rpx;
 }
 
-/* 休息中遮罩 */
-.closed-mask {
+/* 打烊：透明层盖住购物车栏 */
+.closed-cart-overlay {
   position: fixed;
-  top: 0;
   left: 0;
   right: 0;
   bottom: 0;
-  background: rgba(255, 255, 255, 0.92);
-  z-index: 999;
+  height: 160rpx;
+  padding-bottom: env(safe-area-inset-bottom);
+  z-index: 200;
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
-.closed-box {
-  text-align: center;
-}
-
-.closed-icon {
-  font-size: 120rpx;
-}
-
-.closed-text {
-  font-size: 40rpx;
-  font-weight: 700;
-  color: #333;
-  margin-top: 24rpx;
-}
-
-.closed-sub {
-  font-size: 26rpx;
-  color: #999;
-  margin-top: 12rpx;
+.closed-cart-tip {
+  background: rgba(0, 0, 0, 0.7);
+  color: #fff;
+  font-size: 24rpx;
+  padding: 12rpx 32rpx;
+  border-radius: 32rpx;
 }
