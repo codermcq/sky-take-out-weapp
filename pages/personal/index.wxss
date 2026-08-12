@@ -45,8 +45,14 @@
   color: #ccc;
 }
 
-.personal-nickname {
+.personal-info {
   margin-left: 24rpx;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.personal-nickname {
   font-size: 32rpx;
   color: #333;
   background: none;
@@ -57,6 +63,12 @@
 
 .personal-nickname::placeholder {
   color: #999;
+}
+
+.personal-phone {
+  font-size: 26rpx;
+  color: #999;
+  line-height: 36rpx;
 }
 
 /* 菜单 */

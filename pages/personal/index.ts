@@ -1,19 +1,38 @@
 /** 个人中心：头像/昵称 + 地址管理 + 历史订单 */
 import userStore from '../../store/userStore'
-import { uploadFile, updateProfile } from '../../services/user'
+import { uploadFile, updateProfile, getProfile } from '../../services/user'
 
 Page({
   data: {
     avatar: '',
     nickname: '',
+    phone: '',
   },
 
   onShow() {
-    const ui = userStore.state?.userInfo
-    this.setData({
-      avatar: ui?.avatar || '',
-      nickname: ui?.nickname || '',
-    })
+    this.loadUserInfo()
+  },
+
+  /** 从后端拉取最新用户信息 */
+  loadUserInfo() {
+    getProfile()
+      .then((user) => {
+        userStore.dispatch('setUserInfoAction', user)
+        this.setData({
+          avatar: user.avatar || '',
+          nickname: user.name || '',
+          phone: user.phone || '',
+        })
+      })
+      .catch(() => {
+        // 接口失败则使用本地缓存
+        const ui = userStore.state?.userInfo
+        this.setData({
+          avatar: ui?.avatar || '',
+          nickname: ui?.name || '',
+          phone: ui?.phone || '',
+        })
+      })
   },
 
   onChooseAvatar(e: WechatMiniprogram.CustomEvent) {

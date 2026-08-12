@@ -10,13 +10,16 @@
       />
       <view wx:else class="personal-avatar-ph">👤</view>
     </button>
-    <input
-      class="personal-nickname"
-      type="nickname"
-      value="{{nickname}}"
-      placeholder="点击设置昵称"
-      bindchange="onNicknameChange"
-    />
+    <view class="personal-info">
+      <input
+        class="personal-nickname"
+        type="nickname"
+        value="{{nickname}}"
+        placeholder="点击设置昵称"
+        bindchange="onNicknameChange"
+      />
+      <text class="personal-phone" wx:if="{{phone}}">{{phone}}</text>
+    </view>
   </view>
 
   <!-- 菜单 -->

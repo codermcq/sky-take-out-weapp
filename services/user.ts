@@ -1,6 +1,6 @@
 /** 用户相关接口 */
 import { mqRequest, mqUpload } from './index'
-import { LoginResult } from '../types/user'
+import { LoginResult, UserInfo } from '../types/user'
 
 /** 微信登录：wx.login 拿 code 换 token（后端返回 {id, openid, token}） */
 export function login(code: string) {
@@ -27,5 +27,12 @@ export function updateProfile(data: { avatar?: string; name?: string }) {
   return mqRequest.put({
     url: '/user/user/profile',
     data,
+  })
+}
+
+/** 查询当前用户信息 */
+export function getProfile() {
+  return mqRequest.get<UserInfo>({
+    url: '/user/user/profile',
   })
 }
