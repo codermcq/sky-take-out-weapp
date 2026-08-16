@@ -1,4 +1,4 @@
-/** 苍穹外卖小程序入口 */
+/** 星厨到家小程序入口 */
 import userStore from './store/userStore'
 import shopStore from './store/shopStore'
 import shopCartStore from './store/shopCartStore'

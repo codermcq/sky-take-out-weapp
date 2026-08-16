@@ -3,7 +3,7 @@
   <view class="home-header">
     <view class="home-header-inner" style="padding-top: {{statusBarHeight}}px;">
       <view class="home-shop-row">
-        <view class="home-shop-name">苍穹外卖</view>
+        <view class="home-shop-name">星厨到家</view>
         <view class="home-shop-status {{shopStatus === 1 ? '' : 'is-closed'}}">{{shopStatus === 1 ? '营业中' : '休息中'}}</view>
         <view class="home-phone" bindtap="onCallPhone">📞</view>
       </view>

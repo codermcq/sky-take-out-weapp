@@ -86,7 +86,7 @@ export interface Order {
   orderDetailList: OrderDetail[]
 }
 
-/** 提交订单 DTO（对齐苍穹外卖标准后端 submitOrderDTO） */
+/** 提交订单 DTO（对齐星厨到家标准后端 submitOrderDTO） */
 export interface OrderSubmitDTO {
   addressBookId: number
   payMethod: number

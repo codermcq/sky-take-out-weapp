@@ -18,7 +18,7 @@ export const BASE_URL = envVersion === 'release' ? PROD_BASE_URL : DEV_BASE_URL
 
 /**
  * 登录 token 在 storage 中的 key。
- * 后端用户端 JWT 配置 `sky.jwt.user-token-name: authentication`，header 名同为 authentication。
+ * 后端用户端 JWT 配置 `starchef.jwt.user-token-name: authentication`，header 名同为 authentication。
  */
 export const TOKEN_KEY = 'authentication'
 

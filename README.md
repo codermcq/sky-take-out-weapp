@@ -1,6 +1,6 @@
-# 苍穹外卖小程序用户端（sky-takeout-weapp）
+# 星厨到家小程序用户端（starchef-weapp）
 
-原生微信小程序 + TypeScript + Vant Weapp + hy-event-store 实现的「苍穹外卖」用户端点餐闭环。
+原生微信小程序 + TypeScript + Vant Weapp + hy-event-store 实现的「星厨到家」用户端点餐闭环。
 
 ## 功能
 

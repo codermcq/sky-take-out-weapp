@@ -1,7 +1,7 @@
 {
-  "name": "sky-takeout-weapp",
+  "name": "starchef-weapp",
   "version": "1.0.0",
-  "description": "苍穹外卖微信小程序用户端",
+  "description": "星厨到家微信小程序用户端",
   "dependencies": {
     "@vant/weapp": "^1.11.7",
     "hy-event-store": "^1.3.1"
